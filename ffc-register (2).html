@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Join the Collective — Female Founder Collective</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --burgundy: #8B1538;
+      --rose:     #C7365F;
+      --gold:     #D4A5A5;
+      --cream:    #FFF8F5;
+      --sand:     #EDE3D5;
+      --ink:      #1C1410;
+      --muted:    #7A6560;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    /* ── LEFT PANEL ── */
+    .left-panel {
+      background: var(--ink);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 56px 64px;
+      min-height: 100vh;
+    }
+
+    .left-panel::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 80%, rgba(139,21,56,.55) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(199,54,95,.2) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .left-panel::after {
+      content: '"';
+      font-family: 'Playfair Display', serif;
+      font-size: 520px;
+      color: rgba(255,255,255,.03);
+      position: absolute;
+      bottom: -120px;
+      right: -40px;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    /* top line accent */
+    .left-panel .top-line {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(to right, transparent, var(--gold), var(--rose), var(--gold), transparent);
+    }
+
+    .lp-logo {
+      position: relative;
+      z-index: 1;
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: white;
+      text-decoration: none;
+    }
+    .lp-logo em { font-style: italic; color: var(--gold); }
+
+    .lp-center {
+      position: relative;
+      z-index: 1;
+    }
+
+    .lp-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 28px;
+    }
+    .lp-label::before {
+      content: '';
+      display: block;
+      width: 28px; height: 1px;
+      background: var(--gold);
+      opacity: .6;
+    }
+
+    .lp-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(36px, 3.8vw, 54px);
+      font-weight: 900;
+      line-height: 1.08;
+      color: white;
+      margin-bottom: 24px;
+    }
+    .lp-heading em { font-style: italic; color: var(--gold); }
+
+    .lp-sub {
+      font-size: 15px;
+      line-height: 1.8;
+      color: rgba(255,255,255,.5);
+      max-width: 360px;
+      margin-bottom: 52px;
+    }
+
+    .lp-perks {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .lp-perk {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .lp-perk-icon {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(212,165,165,.3);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .lp-perk-icon svg { width: 16px; height: 16px; stroke: var(--gold); stroke-width: 2; fill: none; }
+    .lp-perk-text strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: white;
+      margin-bottom: 2px;
+    }
+    .lp-perk-text span {
+      font-size: 12px;
+      color: rgba(255,255,255,.4);
+      line-height: 1.5;
+    }
+
+    .lp-bottom {
+      position: relative;
+      z-index: 1;
+    }
+    .lp-quote {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 14px;
+      line-height: 1.7;
+      color: rgba(255,255,255,.4);
+      border-left: 2px solid rgba(212,165,165,.3);
+      padding-left: 16px;
+    }
+
+    /* ── RIGHT PANEL ── */
+    .right-panel {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 60px 72px;
+      background: var(--cream);
+      overflow-y: auto;
+    }
+
+    .form-header {
+      margin-bottom: 40px;
+    }
+    .form-header .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      letter-spacing: .08em;
+      color: var(--muted);
+      text-decoration: none;
+      margin-bottom: 36px;
+      transition: color .2s;
+    }
+    .form-header .back-link:hover { color: var(--rose); }
+    .form-header .back-link svg { width: 14px; height: 14px; stroke: currentColor; stroke-width: 2; fill: none; }
+
+    .form-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(26px, 3vw, 36px);
+      font-weight: 900;
+      color: var(--ink);
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+    .form-title em { font-style: italic; color: var(--rose); }
+
+    .form-sub {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── FORM ── */
+    .register-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      margin-bottom: 20px;
+    }
+
+    .field label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      color: var(--ink);
+      background: white;
+      border: 1px solid var(--sand);
+      border-bottom: 2px solid var(--sand);
+      padding: 13px 16px;
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+      width: 100%;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    .field input::placeholder,
+    .field textarea::placeholder { color: rgba(122,101,96,.4); }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: var(--rose);
+      border-bottom-color: var(--rose);
+      box-shadow: 0 4px 16px rgba(199,54,95,.08);
+    }
+
+    .field textarea { resize: none; min-height: 90px; line-height: 1.6; }
+
+    .select-wrap { position: relative; }
+    .select-wrap::after {
+      content: '▾';
+      position: absolute;
+      right: 14px; top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      font-size: 12px;
+      pointer-events: none;
+    }
+    .select-wrap select { padding-right: 36px; cursor: pointer; }
+
+    .field-divider {
+      height: 1px;
+      background: var(--sand);
+      margin: 8px 0 24px;
+    }
+
+    .field-section-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .field-section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--sand);
+    }
+
+    /* checkboxes */
+    .checkbox-field {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 14px;
+      cursor: pointer;
+    }
+    .checkbox-field input[type="checkbox"] {
+      width: 18px; height: 18px;
+      border: 1.5px solid var(--sand);
+      background: white;
+      flex-shrink: 0;
+      margin-top: 1px;
+      accent-color: var(--burgundy);
+      cursor: pointer;
+    }
+    .checkbox-field span {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+    .checkbox-field span a {
+      color: var(--rose);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(199,54,95,.3);
+    }
+
+    /* submit button */
+    .submit-btn {
+      margin-top: 8px;
+      padding: 17px 40px;
+      background: var(--burgundy);
+      color: white;
+      border: none;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: background .3s, transform .2s, box-shadow .3s;
+      box-shadow: 0 4px 20px rgba(139,21,56,.3);
+      width: 100%;
+    }
+    .submit-btn::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -75%;
+      width: 50%; height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,.18), transparent);
+      transform: skewX(-20deg);
+      animation: shimmer 2.8s ease-in-out infinite;
+    }
+    .submit-btn:hover {
+      background: var(--rose);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(199,54,95,.4);
+    }
+    @keyframes shimmer {
+      0%   { left: -75%; opacity: 0; }
+      30%  { opacity: 1; }
+      100% { left: 130%; opacity: 0; }
+    }
+
+    .login-link {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .login-link a {
+      color: var(--rose);
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid rgba(199,54,95,.3);
+    }
+
+    /* step indicator */
+    .steps {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 32px;
+    }
+    .step {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .step.active { color: var(--burgundy); font-weight: 600; }
+    .step.done { color: var(--rose); }
+    .step-num {
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      border: 1.5px solid var(--sand);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 600;
+      color: var(--muted);
+      background: white;
+    }
+    .step.active .step-num {
+      background: var(--burgundy);
+      border-color: var(--burgundy);
+      color: white;
+    }
+    .step-sep {
+      flex: 1; height: 1px;
+      background: var(--sand);
+      max-width: 32px;
+    }
+
+    /* success state */
+    .success-state {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 60px 0;
+      gap: 20px;
+    }
+    .success-state.show { display: flex; }
+    .success-ring {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--burgundy), var(--rose));
+      display: flex; align-items: center; justify-content: center;
+    }
+    .success-ring svg { width: 36px; height: 36px; stroke: white; stroke-width: 2.5; fill: none; }
+    .success-state h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px; font-weight: 700;
+      color: var(--ink);
+    }
+    .success-state p { font-size: 15px; color: var(--muted); line-height: 1.7; max-width: 340px; }
+
+    /* responsive */
+    @media (max-width: 900px) {
+      body { grid-template-columns: 1fr; }
+      .left-panel { min-height: auto; padding: 48px 36px; }
+      .lp-perks { display: none; }
+      .lp-quote { display: none; }
+      .right-panel { padding: 48px 36px; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ LEFT PANEL ══ -->
+<div class="left-panel">
+  <div class="top-line"></div>
+
+  <a href="community-website-step1.html" class="lp-logo">Female <em>Founder</em> Collective.</a>
+
+  <div class="lp-center">
+    <div class="lp-label">Membership Application</div>
+    <h1 class="lp-heading">Your seat at<br>the <em>table</em><br>awaits.</h1>
+    <p class="lp-sub">Join a community of Saudi women building businesses with purpose, power, and each other.</p>
+
+    <div class="lp-perks">
+      <div class="lp-perk">
+        <div class="lp-perk-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="lp-perk-text">
+          <strong>Exclusive Network</strong>
+          <span>Connect with founders, investors & changemakers across Saudi Arabia</span>
+        </div>
+      </div>
+      <div class="lp-perk">
+        <div class="lp-perk-icon">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <div class="lp-perk-text">
+          <strong>Programs & Events</strong>
+          <span>Priority access to curated events, workshops, and mentorship circles</span>
+        </div>
+      </div>
+      <div class="lp-perk">
+        <div class="lp-perk-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <div class="lp-perk-text">
+          <strong>Visibility & Growth</strong>
+          <span>Get featured, gain exposure, and grow your business within the Kingdom</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="lp-bottom">
+    <p class="lp-quote">"When women come together, beautiful things happen."<br>— The FFC Team</p>
+  </div>
+</div>
+
+<!-- ══ RIGHT PANEL ══ -->
+<div class="right-panel">
+
+  <div class="form-header">
+    <a href="community-website-step1.html" class="back-link">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      Back to site
+    </a>
+
+    <div class="steps">
+      <div class="step active">
+        <div class="step-num">1</div>
+        About You
+      </div>
+      <div class="step-sep"></div>
+      <div class="step">
+        <div class="step-num">2</div>
+        Your Business
+      </div>
+      <div class="step-sep"></div>
+      <div class="step">
+        <div class="step-num">3</div>
+        Confirm
+      </div>
+    </div>
+
+    <h2 class="form-title">Join the <em>Collective</em></h2>
+    <p class="form-sub">Fill in your details below — we'll review your application and be in touch soon.</p>
+  </div>
+
+  <!-- FORM -->
+  <form class="register-form" id="memberForm">
+
+    <div class="field-section-label">Personal Info</div>
+
+    <div class="form-row">
+      <div class="field">
+        <label>First Name</label>
+        <input type="text" id="first_name" placeholder="Noura" required/>
+      </div>
+      <div class="field">
+        <label>Last Name</label>
+        <input type="text" id="last_name" placeholder="Al-Rashid" required/>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Email Address</label>
+      <input type="email" id="email" placeholder="you@example.com" required/>
+    </div>
+
+    <div class="field">
+      <label>Phone Number</label>
+      <input type="tel" id="phone" placeholder="+966 5X XXX XXXX"/>
+    </div>
+
+    <div class="field">
+      <label>City</label>
+      <div class="select-wrap">
+        <select id="city" required>
+          <option value="" disabled selected>Select your city</option>
+          <option>Riyadh</option>
+          <option>Jeddah</option>
+          <option>Dammam</option>
+          <option>Mecca</option>
+          <option>Medina</option>
+          <option>Other</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field-divider"></div>
+    <div class="field-section-label">Your Business</div>
+
+    <div class="field">
+      <label>Business / Brand Name</label>
+      <input type="text" id="business_name" placeholder="Your brand name"/>
+    </div>
+
+    <div class="form-row">
+      <div class="field">
+        <label>Industry</label>
+        <div class="select-wrap">
+          <select id="industry">
+            <option value="" disabled selected>Select industry</option>
+            <option>Fashion & Beauty</option>
+            <option>Tech & Innovation</option>
+            <option>Food & Hospitality</option>
+            <option>Health & Wellness</option>
+            <option>Education</option>
+            <option>Finance</option>
+            <option>Creative Arts</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label>Business Stage</label>
+        <div class="select-wrap">
+          <select id="business_stage">
+            <option value="" disabled selected>Select stage</option>
+            <option>Idea Stage</option>
+            <option>Early Stage</option>
+            <option>Growing</option>
+            <option>Established</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Tell us about yourself & your goals</label>
+      <textarea id="about_and_goals" placeholder="Share a little about who you are, what you're building, and what you hope to get from FFC..."></textarea>
+    </div>
+
+    <div class="field-divider"></div>
+
+    <div class="checkbox-field">
+      <input type="checkbox" id="agreed_to_terms" required/>
+      <span>I agree to the <a href="#">Terms & Conditions</a> and <a href="#">Privacy Policy</a> of Female Founder Collective.</span>
+    </div>
+
+    <div class="checkbox-field">
+      <input type="checkbox" id="wants_updates"/>
+      <span>I'd love to receive updates about events, programs, and community news.</span>
+    </div>
+
+    <button type="submit" class="submit-btn">Submit Application</button>
+
+    <p class="login-link">Already a member? <a href="#">Sign in here</a></p>
+
+  </form>
+
+  <!-- SUCCESS -->
+  <div class="success-state" id="successState">
+    <div class="success-ring">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <h3>Application Received!</h3>
+    <p>Thank you for joining the movement. We'll review your application and reach out within 3–5 business days.</p>
+    <a href="community-website-step1.html" style="font-size:13px;color:var(--rose);text-decoration:none;border-bottom:1px solid rgba(199,54,95,.3);padding-bottom:2px;letter-spacing:.06em;">← Back to FFC</a>
+  </div>
+
+</div>
+
+<!-- 1) Supabase SDK + client -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const SUPABASE_URL = "https://wtjsvrwhphuvwwlgozj.supabase.co";
+  const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_jDqQhY4nJ7VlRltX1LzQbg_SHssn2ya";
+  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+  // Helper: safely read input value by id
+  function val(id) {
+    const el = document.getElementById(id);
+    return el ? el.value.trim() : "";
+  }
+  function opt(id) {
+    const v = val(id);
+    return v === "" ? null : v;
+  }
+  function checked(id) {
+    const el = document.getElementById(id);
+    return !!(el && el.checked);
+  }
+  // 2) Hook your form submit
+  // IMPORTANT: your form element must have id="memberForm"
+  document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("memberForm");
+    if (!form) {
+      console.warn('memberForm not found. Add id="memberForm" to your membership <form>.');
+      return;
+    }
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const payload = {
+        first_name: val("first_name"),
+        last_name: val("last_name"),
+        email: val("email"),
+        phone: opt("phone"),
+        city: opt("city"),
+        business_name: opt("business_name"),
+        industry: opt("industry"),
+        business_stage: opt("business_stage"),
+        about_and_goals: opt("about_and_goals"),
+        agreed_to_terms: checked("agreed_to_terms"),
+        wants_updates: checked("wants_updates")
+      };
+      // Basic required checks (matches NOT NULL in DB)
+      if (!payload.first_name || !payload.last_name || !payload.email) {
+        alert("Please fill first name, last name, and email.");
+        return;
+      }
+      if (!payload.agreed_to_terms) {
+        alert("Please agree to the terms.");
+        return;
+      }
+      const { error } = await supabase.from("members").insert([payload]);
+      if (error) {
+        console.error("Insert members error:", error);
+        // Common: duplicate email (unique constraint)
+        alert(error.message);
+        return;
+      }
+      alert("Submitted ✅");
+      form.reset();
+    });
+  });
+</script>
+
+</body>
+</html>
