@@ -566,7 +566,7 @@
     <div class="field">
       <label>City</label>
       <div class="select-wrap">
-        <select id="city" required>
+        <select id="city">
           <option value="" disabled selected>Select your city</option>
           <option>Riyadh</option>
           <option>Jeddah</option>
@@ -707,11 +707,15 @@
       if (error) {
         console.error("Insert members error:", error);
         // Common: duplicate email (unique constraint)
-        alert(error.message);
+        if (error.code === '23505') {
+          alert("This email address is already registered. Please use a different email.");
+        } else {
+          alert("Something went wrong: " + error.message);
+        }
         return;
       }
-      alert("Submitted ✅");
-      form.reset();
+      form.style.display = "none";
+      document.getElementById("successState").classList.add("show");
     });
   });
 </script>
