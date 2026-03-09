@@ -55,7 +55,7 @@
   .hero-tag::before, .hero-tag::after { content: '◆'; margin: 0 14px; color: var(--rose); font-size: .38rem; }
   .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(3.2rem,7vw,7rem); font-weight: 300; line-height: 1.02; color: var(--cream); margin-bottom: 24px; opacity: 0; animation: fadeUp 1s ease .8s forwards; }
   .hero-title em { font-style: italic; color: var(--gold); }
-  .hero-sub { font-size: 1rem; font-weight: 300; color: rgba(255,248,245,.55); line-height: 1.8; max-width: 540px; margin: 0 auto 44px; opacity: 0; animation: fadeUp 1s ease 1.1s forwards; }
+  .hero-sub { font-size: 1rem; font-weight: 300; color: rgba(255,248,245,.55); line-height: 1.85; max-width: 640px; margin: 0 auto 44px; opacity: 0; animation: fadeUp 1s ease 1.1s forwards; }
   .hero-actions { display: flex; gap: 16px; justify-content: center; opacity: 0; animation: fadeUp 1s ease 1.4s forwards; }
   .btn-primary { background: var(--burgundy); color: var(--cream); padding: 16px 40px; font-family: 'DM Sans', sans-serif; font-size: .68rem; letter-spacing: .22em; text-transform: uppercase; border: none; cursor: none; text-decoration: none; display: inline-block; position: relative; overflow: hidden; transition: background .3s; }
   .btn-primary::before { content: ''; position: absolute; inset: 0; background: var(--rose); transform: translateX(-100%); transition: transform .4s ease; }
@@ -115,9 +115,13 @@
   .about-heading em { font-style: italic; color: var(--burgundy); }
   .about-pull { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 400; font-style: italic; color: var(--burgundy); line-height: 1.6; margin-bottom: 28px; padding-left: 20px; border-left: 2px solid var(--rose); }
   .about-body { font-size: .95rem; font-weight: 300; line-height: 1.9; color: var(--muted); margin-bottom: 48px; }
-  .about-tags { display: flex; flex-wrap: wrap; gap: 10px; }
-  .about-tag { font-size: .52rem; letter-spacing: .38em; text-transform: uppercase; color: var(--burgundy); border: 1px solid rgba(139,21,56,.2); padding: 8px 16px; transition: all .3s; }
-  .about-tag:hover { background: var(--burgundy); color: var(--cream); }
+  .about-pillars { display: grid; grid-template-columns: 1fr 1fr; margin-top: 44px; border-top: 1px solid var(--sand); }
+  .about-pillar { padding: 28px 20px 28px 0; border-bottom: 1px solid var(--sand); transition: background .3s; }
+  .about-pillar:nth-child(even) { padding-left: 24px; padding-right: 0; border-left: 1px solid var(--sand); }
+  .about-pillar:nth-last-child(-n+2) { border-bottom: none; }
+  .about-pillar-mark { display: block; font-size: .26rem; color: var(--rose); margin-bottom: 12px; letter-spacing: .4em; }
+  .about-pillar-name { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 500; color: var(--ink); margin-bottom: 8px; letter-spacing: .02em; }
+  .about-pillar-desc { font-size: .82rem; font-weight: 300; color: var(--muted); line-height: 1.75; }
   /* IMPACT BAND */
   .impact-band { background: linear-gradient(135deg, #0e0408 0%, #1a0810 50%, #0e0408 100%); padding: 120px 80px; text-align: center; position: relative; overflow: hidden; }
   .impact-band::before { content: ''; position: absolute; top: -200px; left: 50%; transform: translateX(-50%); width: 700px; height: 700px; background: radial-gradient(circle, rgba(139,21,56,.2) 0%, transparent 70%); pointer-events: none; }
@@ -269,8 +273,8 @@
   <div class="hero-glass"><div class="hero-glass-shape"></div></div>
   <div class="hero-content">
     <p class="hero-tag">Saudi Arabia's Female Founder Community</p>
-    <h1 class="hero-title">Where Visionary<br>Women <em>Build Empires</em></h1>
-    <p class="hero-sub">A non-profit community supporting female-founded businesses across the Kingdom — from first idea to lasting legacy.</p>
+    <h1 class="hero-title">Built by Women.<br><em>Backed by Community.</em></h1>
+    <p class="hero-sub">We support, develop, and elevate female-founded and women-owned businesses in Saudi Arabia — because prosperity looks different for every woman, and every version deserves to thrive.</p>
     <div class="hero-actions">
       <a href="#join" class="btn-primary"><span>Become a Member</span></a>
       <a href="#programs" class="btn-outline">Explore Programs</a>
@@ -318,10 +322,32 @@
     </div>
   </div>
   <div class="reveal">
-    <span class="eyebrow">Our Story</span>
-    <h2 class="heading">Built by Women,<br><em>For Women</em></h2>
+    <span class="eyebrow">Who We Are</span>
+    <h2 class="heading">The Collective for<br><em>Women Who Lead</em></h2>
     <div class="rule"></div>
-    <p class="body-text">A Riyadh-based non-profit community for women building the future. We exist to connect, elevate, and empower the bold women turning vision into venture across the Kingdom — from ideation to scale.</p>
+    <p class="body-text">Female Founder Collective is a Saudi-based network dedicated to supporting, developing, and elevating women in business. We believe every woman deserves the tools, community, and visibility to build the future she envisions — right here in the Kingdom.</p>
+    <div class="about-pillars">
+      <div class="about-pillar">
+        <span class="about-pillar-mark">◆ ◆ ◆</span>
+        <div class="about-pillar-name">Community</div>
+        <p class="about-pillar-desc">Connect with a powerful network of women who lift each other up.</p>
+      </div>
+      <div class="about-pillar">
+        <span class="about-pillar-mark">◆ ◆ ◆</span>
+        <div class="about-pillar-name">Growth</div>
+        <p class="about-pillar-desc">Access resources, mentorship, and programs designed for your success.</p>
+      </div>
+      <div class="about-pillar">
+        <span class="about-pillar-mark">◆ ◆ ◆</span>
+        <div class="about-pillar-name">Innovation</div>
+        <p class="about-pillar-desc">Challenge the status quo and build businesses that change Saudi Arabia.</p>
+      </div>
+      <div class="about-pillar">
+        <span class="about-pillar-mark">◆ ◆ ◆</span>
+        <div class="about-pillar-name">Impact</div>
+        <p class="about-pillar-desc">Create lasting change for women in the Saudi business landscape.</p>
+      </div>
+    </div>
     <a href="#join" class="text-link">Join the Collective</a>
   </div>
 </div>
