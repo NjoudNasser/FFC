@@ -235,11 +235,9 @@
     <a href="#about">About</a>
     <a href="#programs">Programs</a>
     <a href="#events">Events</a>
-    <a href="#join">Join Us</a>
   </div>
   <div class="nav-right">
     <button class="lang-toggle">EN / AR</button>
-    <a href="#join" class="nav-cta">Become a Member</a>
   </div>
 </nav>
 
@@ -251,7 +249,6 @@
     <h1 class="hero-title">Where Visionary<br>Women <em>Build Empires</em></h1>
     <p class="hero-sub">A non-profit community supporting female-founded businesses across the Kingdom — from first idea to lasting legacy.</p>
     <div class="hero-actions">
-      <a href="#join" class="btn-primary"><span>Become a Member</span></a>
       <a href="#programs" class="btn-outline">Explore Programs</a>
     </div>
   </div>
@@ -359,69 +356,6 @@
   </div>
 </div>
 
-<!-- NEWSLETTER -->
-<div class="nl-wrap" id="newsletter">
-  <div class="reveal">
-    <span class="eyebrow">Stay Connected</span>
-    <h2 class="heading">Join Our<br><em>Newsletter</em></h2>
-    <p class="body-text">Stories, events, and insights from Saudi Arabia's growing community of women founders. Delivered with intention.</p>
-  </div>
-  <div class="reveal">
-    <form id="nl-form" onsubmit="handleNewsletter(event)">
-    <div class="nl-row">
-      <input type="email" id="nl-email" placeholder="Your email address" required>
-      <button type="submit" id="nl-btn">Subscribe →</button>
-    </div>
-    <p class="nl-note" id="nl-note">No spam. Only what matters.</p>
-    </form>
-  </div>
-</div>
-
-<!-- JOIN -->
-<div class="join-wrap" id="join">
-  <div class="reveal">
-    <span class="eyebrow">Membership</span>
-    <h2 class="heading">Become part<br>of something<br><em>rare.</em></h2>
-    <div class="rule"></div>
-    <p class="body-text">Whether you're a founder at any stage or a professional who wants to contribute — there's a place for you within the Collective.</p>
-    <div class="join-benefits">
-      <div class="benefit">Access to all events &amp; gatherings</div>
-      <div class="benefit">Mentor circles &amp; one-on-one consultation</div>
-      <div class="benefit">Exclusive Founder Bootcamp</div>
-      <div class="benefit">The FFC Podcast network</div>
-      <div class="benefit">Private member community</div>
-    </div>
-  </div>
-  <div class="reveal">
-    <div class="ftabs">
-      <button class="ftab active" id="ftab-member" onclick="switchFTab('member')">Join as Member</button>
-      <button class="ftab" id="ftab-team" onclick="switchFTab('team')">Join as Team</button>
-    </div>
-    <div class="fcontent active" id="fcontent-member">
-      <div class="frow">
-        <div class="fgroup"><label>First Name</label><input type="text" placeholder="Lara"></div>
-        <div class="fgroup"><label>Last Name</label><input type="text" placeholder="Al-Rashidi"></div>
-      </div>
-      <div class="fgroup"><label>Email</label><input type="email" placeholder="your@email.com"></div>
-      <div class="fgroup"><label>Your Business / Venture</label><input type="text" placeholder="Company or idea name"></div>
-      <div class="fgroup"><label>Industry</label><select><option value="">Select your industry</option><option>Technology</option><option>Fashion &amp; Beauty</option><option>F&amp;B / Hospitality</option><option>Health &amp; Wellness</option><option>Education</option><option>Finance &amp; Fintech</option><option>Media &amp; Creative</option><option>Other</option></select></div>
-      <div class="fgroup"><label>Stage</label><select><option value="">Where are you in your journey?</option><option>Ideation</option><option>Pre-launch</option><option>Launched / Early Stage</option><option>Growth Stage</option><option>Scaling</option></select></div>
-      <button class="btn-submit" id="submit-member"><span>Submit Application →</span></button>
-    </div>
-    <div class="fcontent" id="fcontent-team">
-      <div class="frow">
-        <div class="fgroup"><label>First Name</label><input type="text" placeholder="Nora"></div>
-        <div class="fgroup"><label>Last Name</label><input type="text" placeholder="Al-Qahtani"></div>
-      </div>
-      <div class="fgroup"><label>Email</label><input type="email" placeholder="your@email.com"></div>
-      <div class="fgroup"><label>Role / Expertise</label><input type="text" placeholder="e.g. Marketing, Operations, Design"></div>
-      <div class="fgroup"><label>LinkedIn Profile</label><input type="url" placeholder="linkedin.com/in/yourname"></div>
-      <div class="fgroup"><label>Why FFC?</label><textarea placeholder="Tell us why you want to be part of the team..." rows="3" style="resize:none;"></textarea></div>
-      <button class="btn-submit" id="submit-team"><span>Submit Application →</span></button>
-    </div>
-  </div>
-</div>
-
 <!-- FOOTER -->
 <footer>
   <div class="footer-grid">
@@ -435,7 +369,7 @@
     </div>
     <div class="footer-col"><h5>About</h5><a href="#about">Our Story</a><a href="#about">Our Mission</a><a href="#about">The Team</a></div>
     <div class="footer-col"><h5>Programs</h5><a href="#programs">Mentorship Circle</a><a href="#programs">Founder Bootcamp</a><a href="#programs">Network Events</a></div>
-    <div class="footer-col"><h5>Connect</h5><a href="#join">Join as Member</a><a href="#join">Join as Team</a><a href="#newsletter">Newsletter</a><a href="#events">Events</a></div>
+    <div class="footer-col"><h5>Connect</h5><a href="#events">Events</a></div>
   </div>
   <div class="footer-base">
     <p>© 2025 Female Founder Collective Saudi Arabia · Non-profit Organization</p>
@@ -473,50 +407,6 @@ const counterObs = new IntersectionObserver(([e], obs) => {
 },{threshold:.25});
 counterObs.observe(document.querySelector('.stats-bar'));
 
-// TABS
-function switchFTab(tab) {
-  ['member','team'].forEach(t => {
-    document.getElementById('ftab-'+t).classList.toggle('active',t===tab);
-    document.getElementById('fcontent-'+t).classList.toggle('active',t===tab);
-  });
-}
-
-// SUBMIT
-function getFormInputs(contentId) {
-  const section = document.getElementById(contentId);
-  return section ? section.querySelectorAll('input,textarea') : [];
-}
-['submit-member','submit-team'].forEach(id => {
-  const b = document.getElementById(id);
-  const contentId = 'fcontent-' + id.replace('submit-','');
-  b.addEventListener('click', () => {
-    const inputs = getFormInputs(contentId);
-    const nameInput = inputs[0], lastInput = inputs[1], emailInput = inputs[2];
-    if (!nameInput || !nameInput.value.trim()) { nameInput && nameInput.focus(); alert('Please enter your first name.'); return; }
-    if (!lastInput || !lastInput.value.trim()) { lastInput && lastInput.focus(); alert('Please enter your last name.'); return; }
-    if (!emailInput || !emailInput.value.trim()) { emailInput && emailInput.focus(); alert('Please enter your email address.'); return; }
-    const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRe.test(emailInput.value.trim())) { emailInput.focus(); alert('Please enter a valid email address.'); return; }
-    b.innerHTML='<span>Application Received ✦</span>';
-    setTimeout(()=>b.innerHTML='<span>Submit Application →</span>',3000);
-  });
-});
-
-// NEWSLETTER
-function handleNewsletter(e) {
-  e.preventDefault();
-  const input = document.getElementById('nl-email');
-  const note = document.getElementById('nl-note');
-  const btn = document.getElementById('nl-btn');
-  const email = input ? input.value.trim() : '';
-  if (!email) return;
-  btn.textContent = 'Subscribed ✦';
-  btn.disabled = true;
-  note.textContent = 'Welcome to the collective. Watch your inbox.';
-  note.style.color = 'rgba(212,165,165,.9)';
-  input.value = '';
-  setTimeout(() => { btn.textContent = 'Subscribe →'; btn.disabled = false; note.textContent = 'No spam. Only what matters.'; note.style.color = ''; }, 4000);
-}
 
 // THREE.JS
 (function(){
