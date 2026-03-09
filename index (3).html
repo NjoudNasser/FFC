@@ -178,16 +178,21 @@
   .event-arrow::after { content: '→'; font-size: .95rem; }
 
   /* NEWSLETTER */
-  .nl-wrap { background: var(--ink); padding: 130px 80px; display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center; }
-  .nl-wrap .heading { color: var(--cream); }
-  .nl-wrap .body-text { color: rgba(255,248,245,.42); margin-top: 16px; }
-  .nl-wrap .eyebrow { color: var(--rose); }
-  .nl-row { display: flex; align-items: flex-end; border-bottom: 1px solid rgba(255,255,255,.14); padding-bottom: 12px; margin-bottom: 14px; }
-  .nl-row input { flex: 1; background: transparent; border: none; font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 300; color: var(--cream); outline: none; padding: 8px 0; }
-  .nl-row input::placeholder { color: rgba(255,248,245,.2); font-style: italic; }
-  .nl-row button { background: none; border: none; font-family: 'DM Sans', sans-serif; font-size: .58rem; letter-spacing: .38em; text-transform: uppercase; color: var(--rose); cursor: pointer; padding: 8px 0 8px 18px; transition: color .3s, letter-spacing .3s; }
-  .nl-row button:hover { color: var(--gold); letter-spacing: .48em; }
-  .nl-note { font-size: .8rem; font-style: italic; color: rgba(255,248,245,.18); }
+  .nl-wrap { background: var(--burgundy); padding: 160px 80px; text-align: center; position: relative; overflow: hidden; }
+  .nl-wrap::before { content: ''; position: absolute; top: -300px; left: 50%; transform: translateX(-50%); width: 900px; height: 900px; background: radial-gradient(circle, rgba(255,255,255,.04) 0%, transparent 65%); pointer-events: none; }
+  .nl-wrap::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 120% 80% at 50% 100%, rgba(10,3,6,.35) 0%, transparent 60%); pointer-events: none; }
+  .nl-inner { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+  .nl-eyebrow { display: block; font-size: .52rem; letter-spacing: .6em; text-transform: uppercase; color: rgba(255,248,245,.45); margin-bottom: 32px; }
+  .nl-heading { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.8rem,5vw,5.2rem); font-weight: 300; line-height: 1.1; color: var(--cream); margin-bottom: 64px; }
+  .nl-heading em { font-style: italic; color: var(--gold); display: block; }
+  .nl-form { max-width: 560px; margin: 0 auto; }
+  .nl-row { display: flex; align-items: center; border-bottom: 1px solid rgba(255,248,245,.22); padding-bottom: 14px; margin-bottom: 18px; }
+  .nl-row input { flex: 1; background: transparent; border: none; font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 300; font-style: italic; color: var(--cream); outline: none; padding: 8px 0; }
+  .nl-row input::placeholder { color: rgba(255,248,245,.3); }
+  .nl-row button { background: none; border: none; font-family: 'DM Sans', sans-serif; font-size: .55rem; letter-spacing: .44em; text-transform: uppercase; color: rgba(255,248,245,.7); cursor: pointer; padding: 8px 0 8px 22px; white-space: nowrap; transition: color .3s, letter-spacing .3s; }
+  .nl-row button::after { content: ' →'; }
+  .nl-row button:hover { color: var(--gold); letter-spacing: .54em; }
+  .nl-note { font-size: .82rem; font-style: italic; font-family: 'Cormorant Garamond', serif; color: rgba(255,248,245,.22); }
 
   /* JOIN */
   .join-wrap { background: var(--cream); padding: 130px 80px; display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: start; border-top: 1px solid var(--sand); }
@@ -232,7 +237,8 @@
 
   @media (max-width: 900px) {
     nav { padding: 18px 22px; } nav.scrolled { padding: 12px 22px; } .nav-center { display: none; }
-    .about-wrap, .nl-wrap, .join-wrap { grid-template-columns: 1fr; padding: 80px 24px; gap: 48px; }
+    .about-wrap, .join-wrap { grid-template-columns: 1fr; padding: 80px 24px; gap: 48px; }
+    .nl-wrap { padding: 100px 24px; }
     .programs-wrap, .events-wrap { padding: 80px 24px; }
     .programs-grid { grid-template-columns: 1fr; }
     .programs-header { padding: 80px 24px 64px; }
@@ -416,6 +422,21 @@
         <div class="event-meta">Exclusive Dinner · TBA 2025 · Riyadh</div>
         <a href="#" class="event-arrow">Request Invitation</a>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- NEWSLETTER -->
+<div class="nl-wrap">
+  <div class="nl-inner reveal">
+    <span class="nl-eyebrow">Stay in the Loop</span>
+    <h2 class="nl-heading">Subscribe to the<br><em>FFC Newsletter</em></h2>
+    <div class="nl-form">
+      <div class="nl-row">
+        <input type="email" placeholder="Enter your email address">
+        <button type="submit">Subscribe</button>
+      </div>
+      <p class="nl-note">No spam. Only what matters.</p>
     </div>
   </div>
 </div>
