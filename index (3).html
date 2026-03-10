@@ -88,16 +88,18 @@
   .heading-split .word { display: inline-block; overflow: hidden; vertical-align: bottom; line-height: 1.18; }
   .heading-split .word-inner { display: inline-block; transform: translateY(110%) rotate(1.5deg); opacity: 0; transition: transform .72s cubic-bezier(.16,1,.3,1), opacity .55s ease; }
   .heading-split.visible .word-inner { transform: none; opacity: 1; }
-  /* About pillars staggered reveal */
-  .about-pillar { opacity: 0; transform: translateY(22px); transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); }
-  .about-pillars.pillars-visible .about-pillar { opacity: 1; transform: none; }
+  /* About pillars staggered reveal — hidden state added by JS */
+  .about-pillar.pillar-hidden { opacity: 0; transform: translateY(22px); }
+  .about-pillar { transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); }
+  .about-pillars.pillars-visible .about-pillar { opacity: 1 !important; transform: none !important; }
   .about-pillars.pillars-visible .about-pillar:nth-child(1) { transition-delay: 0s; }
   .about-pillars.pillars-visible .about-pillar:nth-child(2) { transition-delay: .13s; }
   .about-pillars.pillars-visible .about-pillar:nth-child(3) { transition-delay: .26s; }
   .about-pillars.pillars-visible .about-pillar:nth-child(4) { transition-delay: .39s; }
-  /* About image iris wipe-in from left */
-  .about-img-wrap { clip-path: inset(0 100% 0 0); transition: clip-path 1.15s cubic-bezier(.16,1,.3,1); }
-  .about-img-side.visible .about-img-wrap { clip-path: inset(0 0% 0 0); }
+  /* About image iris wipe — hidden state added by JS */
+  .about-img-wrap { transition: clip-path 1.15s cubic-bezier(.16,1,.3,1); }
+  .about-img-wrap.img-hidden { clip-path: inset(0 100% 0 0); }
+  .about-img-side.visible .about-img-wrap { clip-path: inset(0 0% 0 0) !important; }
   /* Stat number pop on hover */
   .stat-num { display: inline-block; transition: transform .35s cubic-bezier(.16,1,.3,1), color .3s; }
   .stat-item:hover .stat-num { transform: scale(1.1) translateY(-3px); color: var(--rose); }
@@ -850,6 +852,7 @@ counterObs.observe(document.querySelector('.stats-bar'));
   // ── 5. ABOUT PILLARS STAGGER ──
   const pillars = document.querySelector('.about-pillars');
   if (pillars) {
+    pillars.querySelectorAll('.about-pillar').forEach(p => p.classList.add('pillar-hidden'));
     new IntersectionObserver(([e]) => {
       if (e.isIntersecting) e.target.classList.add('pillars-visible');
     }, {threshold: .15}).observe(pillars);
@@ -890,6 +893,8 @@ counterObs.observe(document.querySelector('.stats-bar'));
   // ── 9. ABOUT IMAGE IRIS WIPE ──
   const aboutImgSide = document.querySelector('.about-img-side');
   if (aboutImgSide) {
+    const imgWrap = aboutImgSide.querySelector('.about-img-wrap');
+    if (imgWrap) imgWrap.classList.add('img-hidden');
     new IntersectionObserver(([e]) => {
       if (e.isIntersecting) e.target.classList.add('visible');
     }, {threshold: .1}).observe(aboutImgSide);
