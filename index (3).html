@@ -188,7 +188,7 @@
   .event-arrow::after { content: '→'; font-size: .95rem; }
 
   /* NEWSLETTER */
-  .nl-wrap { background: var(--ink); padding: 150px 80px; text-align: center; position: relative; overflow: hidden; border-top: 1px solid rgba(255,255,255,.05); }
+  .nl-wrap { background: #000; padding: 150px 80px; text-align: center; position: relative; overflow: hidden; border-top: 1px solid rgba(255,255,255,.05); }
   .nl-wrap::before { content: ''; position: absolute; top: -400px; left: 50%; transform: translateX(-50%); width: 800px; height: 800px; background: radial-gradient(circle, rgba(139,21,56,.18) 0%, transparent 65%); pointer-events: none; }
   .nl-inner { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; }
   .nl-eyebrow { display: flex; align-items: center; justify-content: center; gap: 18px; font-size: .48rem; letter-spacing: .58em; text-transform: uppercase; color: rgba(212,165,165,.45); margin-bottom: 36px; }
@@ -620,7 +620,7 @@ counterObs.observe(document.querySelector('.stats-bar'));
   window.addEventListener('resize',()=>{ cam.aspect=innerWidth/innerHeight; cam.updateProjectionMatrix(); renderer.setSize(innerWidth,innerHeight); });
 })();
 
-// NEWSLETTER STARFIELD
+// NEWSLETTER STARFIELD — floating 4-point sparkle stars on pure black
 (function(){
   const canvas = document.getElementById('nl-stars');
   if (!canvas) return;
@@ -629,159 +629,115 @@ counterObs.observe(document.querySelector('.stats-bar'));
 
   function resize() {
     const r = canvas.parentElement.getBoundingClientRect();
-    W = canvas.width = Math.round(r.width);
+    W = canvas.width  = Math.round(r.width);
     H = canvas.height = Math.round(r.height);
-    ctx.fillStyle = '#060110';
-    ctx.fillRect(0, 0, W, H);
   }
   resize();
-  window.addEventListener('resize', () => { resize(); stars.forEach(s => s.init(true)); });
 
-  // Color palette: warm cream, gold, rare rose
-  const PAL = [
-    [255,248,240],[255,248,240],[255,248,240],[255,248,240],
-    [230,210,160],[255,235,170], // gold
-    [212,165,165]                // rose
-  ];
+  // Size distribution: mostly tiny dots, some sparkles, few large
+  function pickSize() {
+    const r = Math.random();
+    if (r < .52) return .2  + Math.random() * .7;   // tiny dot
+    if (r < .78) return 1.1 + Math.random() * 1.6;  // small sparkle
+    if (r < .94) return 2.8 + Math.random() * 2.4;  // medium sparkle
+    return 5.5 + Math.random() * 4.5;                // large sparkle
+  }
 
   class Star {
-    constructor() { this.init(true); }
-    init(scatter) {
-      this.x  = (Math.random() - .5) * W * 2.4;
-      this.y  = (Math.random() - .5) * H * 2.4;
-      this.z  = scatter ? 1 + Math.random() * W : W;
-      this.pz = this.z;
-      this.spd = .5 + Math.random() * 1.6;
-      this.tp  = Math.random() * Math.PI * 2;
-      this.ts  = .012 + Math.random() * .028;
-      this.sz  = .3 + Math.random() * 2.4;
-      this.col = PAL[Math.floor(Math.random() * PAL.length)];
-    }
-    tick() {
-      this.pz = this.z;
-      this.z -= this.spd;
-      this.tp += this.ts;
-      if (this.z <= 1) this.init(false);
-    }
-    draw() {
-      const sx  = this.x / this.z  * W + W * .5;
-      const sy  = this.y / this.z  * H + H * .5;
-      if (sx < -24 || sx > W+24 || sy < -24 || sy > H+24) return;
-      const psx = this.x / this.pz * W + W * .5;
-      const psy = this.y / this.pz * H + H * .5;
-      const dep = 1 - this.z / W;
-      const csz = dep * this.sz;
-      const tw  = .5 + .5 * Math.sin(this.tp);
-      const al  = Math.min(1, dep * 1.5) * tw;
-      const [r,g,b] = this.col;
-
-      // Motion trail
-      if (dep > .22 && (Math.abs(sx-psx) > .3 || Math.abs(sy-psy) > .3)) {
-        const tr = ctx.createLinearGradient(psx, psy, sx, sy);
-        tr.addColorStop(0, `rgba(${r},${g},${b},0)`);
-        tr.addColorStop(1, `rgba(${r},${g},${b},${al * .38})`);
-        ctx.beginPath(); ctx.moveTo(psx,psy); ctx.lineTo(sx,sy);
-        ctx.strokeStyle = tr; ctx.lineWidth = csz * .55; ctx.stroke();
-      }
-
-      // Glow halo
-      if (csz > .5) {
-        const gl = ctx.createRadialGradient(sx, sy, 0, sx, sy, csz * 5.5);
-        gl.addColorStop(0, `rgba(${r},${g},${b},${al * .28})`);
-        gl.addColorStop(1, 'rgba(0,0,0,0)');
-        ctx.beginPath(); ctx.arc(sx, sy, csz * 5.5, 0, Math.PI*2);
-        ctx.fillStyle = gl; ctx.fill();
-      }
-
-      // Star dot
-      ctx.beginPath(); ctx.arc(sx, sy, Math.max(.25, csz), 0, Math.PI*2);
-      ctx.fillStyle = `rgba(${r},${g},${b},${al})`; ctx.fill();
-
-      // 4-point sparkle cross on bright stars
-      if (csz > 1.1 && tw > .70) {
-        const sa = al * (tw - .70) * 3.8;
-        const sl = csz * 7.5, dl = csz * 5;
-        ctx.lineWidth = .75;
-        const beam = (x0,y0,x1,y1) => {
-          const gd = ctx.createLinearGradient(x0,y0,x1,y1);
-          gd.addColorStop(0, 'rgba(0,0,0,0)');
-          gd.addColorStop(.5, `rgba(${r},${g},${b},${sa})`);
-          gd.addColorStop(1, 'rgba(0,0,0,0)');
-          ctx.beginPath(); ctx.moveTo(x0,y0); ctx.lineTo(x1,y1);
-          ctx.strokeStyle = gd; ctx.stroke();
-        };
-        beam(sx-sl, sy,    sx+sl, sy);       // horizontal
-        beam(sx,    sy-sl, sx,    sy+sl);     // vertical
-        ctx.lineWidth = .5;
-        beam(sx-dl, sy-dl, sx+dl, sy+dl);    // diagonal /
-        beam(sx+dl, sy-dl, sx-dl, sy+dl);    // diagonal \
-      }
-    }
-  }
-
-  class ShootingStar {
-    constructor() {
-      // Start from top-left quadrant edge
-      if (Math.random() < .6) { this.x = Math.random() * W; this.y = -10; }
-      else                     { this.x = -10; this.y = Math.random() * H * .55; }
-      const ang = .18 + Math.random() * .38;
-      const spd = 8 + Math.random() * 9;
+    constructor() { this.reset(true); }
+    reset(scatter) {
+      this.x  = scatter ? Math.random() * W : (Math.random() < .5 ? -8 : W + 8);
+      this.y  = scatter ? Math.random() * H : Math.random() * H;
+      const spd = .06 + Math.random() * .22;
+      const ang = Math.random() * Math.PI * 2;
       this.vx = Math.cos(ang) * spd;
       this.vy = Math.sin(ang) * spd;
-      this.len = 70 + Math.random() * 110;
-      this.al  = 0; this.life = 0;
-      this.max = 32 + Math.random() * 28;
-      this.alive = true;
+      this.sz   = pickSize();
+      this.base = .3 + Math.random() * .7;
+      this.tp   = Math.random() * Math.PI * 2;
+      this.ts   = this.sz > 3 ? .006 + Math.random() * .01 : .02 + Math.random() * .04;
     }
     tick() {
-      this.x += this.vx; this.y += this.vy; this.life++;
-      this.al = this.life < 8 ? this.life/8 : this.life > this.max-8 ? (this.max-this.life)/8 : 1;
-      if (this.life >= this.max) this.alive = false;
+      this.x += this.vx; this.y += this.vy; this.tp += this.ts;
+      if (this.x < -25) this.x = W + 15;
+      if (this.x > W+25) this.x = -15;
+      if (this.y < -25) this.y = H + 15;
+      if (this.y > H+25) this.y = -15;
     }
     draw() {
-      const mag = Math.hypot(this.vx, this.vy);
-      const tx = this.x - (this.vx/mag)*this.len, ty = this.y - (this.vy/mag)*this.len;
-      const grad = ctx.createLinearGradient(tx, ty, this.x, this.y);
-      grad.addColorStop(0, 'rgba(255,248,240,0)');
-      grad.addColorStop(.75, `rgba(255,248,240,${this.al * .65})`);
-      grad.addColorStop(1,  `rgba(255,255,255,${this.al})`);
-      ctx.beginPath(); ctx.moveTo(tx,ty); ctx.lineTo(this.x,this.y);
-      ctx.strokeStyle = grad; ctx.lineWidth = 1.6; ctx.stroke();
-      // Bright head glow
-      const hg = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, 6);
-      hg.addColorStop(0, `rgba(255,255,255,${this.al})`);
-      hg.addColorStop(1, 'rgba(0,0,0,0)');
-      ctx.beginPath(); ctx.arc(this.x, this.y, 6, 0, Math.PI*2);
-      ctx.fillStyle = hg; ctx.fill();
+      const tw    = .4 + .6 * Math.sin(this.tp);
+      const alpha = this.base * tw;
+      const sz    = this.sz;
+
+      // Tiny dot: soft glowing pixel only
+      if (sz < 1.1) {
+        const gr = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, sz * 4);
+        gr.addColorStop(0, `rgba(255,255,255,${alpha})`);
+        gr.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.beginPath(); ctx.arc(this.x, this.y, sz * 4, 0, Math.PI*2);
+        ctx.fillStyle = gr; ctx.fill();
+        ctx.beginPath(); ctx.arc(this.x, this.y, Math.max(.35, sz * .45), 0, Math.PI*2);
+        ctx.fillStyle = `rgba(255,255,255,${alpha})`; ctx.fill();
+        return;
+      }
+
+      // Outer glow halo
+      const hR   = sz * 5;
+      const halo = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, hR);
+      halo.addColorStop(0,   `rgba(255,255,255,${alpha * .30})`);
+      halo.addColorStop(.35, `rgba(255,255,255,${alpha * .08})`);
+      halo.addColorStop(1,   'rgba(0,0,0,0)');
+      ctx.beginPath(); ctx.arc(this.x, this.y, hR, 0, Math.PI*2);
+      ctx.fillStyle = halo; ctx.fill();
+
+      // Draw one tapered sparkle arm
+      const arm = (x0, y0, x1, y1, lw) => {
+        const gd = ctx.createLinearGradient(x0, y0, x1, y1);
+        gd.addColorStop(0,  'rgba(255,255,255,0)');
+        gd.addColorStop(.5, `rgba(255,255,255,${alpha})`);
+        gd.addColorStop(1,  'rgba(255,255,255,0)');
+        ctx.beginPath(); ctx.moveTo(x0, y0); ctx.lineTo(x1, y1);
+        ctx.strokeStyle = gd; ctx.lineWidth = lw; ctx.stroke();
+      };
+
+      // Main cross — length pulses with twinkle
+      const aL  = sz * (sz > 3 ? 1.5 : 1.2) * tw;
+      const lw1 = Math.max(.5, sz * .20);
+      arm(this.x - aL, this.y,       this.x + aL, this.y,       lw1);
+      arm(this.x,       this.y - aL, this.x,       this.y + aL, lw1);
+
+      // Shorter diagonal arms for 4-point ✦ look
+      if (sz > 1.8) {
+        const dL  = aL * .42;
+        const lw2 = Math.max(.3, sz * .10);
+        arm(this.x - dL, this.y - dL, this.x + dL, this.y + dL, lw2);
+        arm(this.x + dL, this.y - dL, this.x - dL, this.y + dL, lw2);
+      }
+
+      // Bright white center core
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, Math.max(.5, sz * .22), 0, Math.PI*2);
+      ctx.fillStyle = `rgba(255,255,255,${Math.min(1, alpha * 1.4)})`;
+      ctx.fill();
     }
   }
 
-  const stars  = Array.from({length:260}, () => new Star());
-  const shoots = [];
-  let shootTimer = 0;
+  const stars = Array.from({length: 155}, () => new Star());
 
-  // Only animate when visible (performance)
   let visible = false;
-  new IntersectionObserver(([e]) => { visible = e.isIntersecting; }, {threshold:.05})
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; }, {threshold: .04})
     .observe(canvas.parentElement);
+
+  window.addEventListener('resize', () => { resize(); stars.forEach(s => s.reset(true)); });
 
   (function frame() {
     requestAnimationFrame(frame);
     if (!visible) return;
-
-    // Fade trail — semi-transparent dark fill each frame
-    ctx.fillStyle = 'rgba(6,1,16,.20)';
+    ctx.fillStyle = '#000';
     ctx.fillRect(0, 0, W, H);
-
     stars.forEach(s => { s.tick(); s.draw(); });
-
-    shootTimer++;
-    if (shootTimer >= 290) { shoots.push(new ShootingStar()); shootTimer = 0; }
-    for (let i = shoots.length-1; i >= 0; i--) {
-      if (shoots[i].alive) { shoots[i].tick(); shoots[i].draw(); }
-      else shoots.splice(i,1);
-    }
   })();
+})();
 })();
 </script>
 </body>
