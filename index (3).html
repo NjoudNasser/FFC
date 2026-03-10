@@ -127,35 +127,58 @@
   .impact-src { display: block; margin-top: 28px; font-size: .58rem; letter-spacing: .45em; text-transform: uppercase; color: var(--rose); opacity: .75; position: relative; z-index: 1; }
 
   /* PROGRAMS */
-  .programs-wrap { padding: 0; background: #fff8f5; position: relative; overflow: hidden; border-top: 1px solid var(--sand); }
-  .programs-wrap::before { content: ''; position: absolute; top: 0; right: -160px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(212,165,165,.18) 0%, transparent 65%); pointer-events: none; }
-  .programs-header { padding: 72px 80px 52px; position: relative; z-index: 1; }
-  .programs-header-top { display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: 40px; border-bottom: 2px solid var(--sand); }
-  .programs-header-left { display: inline-block; }
-  .programs-header-right { display: block; max-width: 360px; text-align: right; }
-  .programs-header .eyebrow { color: var(--rose); letter-spacing: .52em; margin-bottom: 12px; }
-  .programs-header .heading { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem,3.2vw,3.4rem); font-weight: 300; color: var(--ink); margin-bottom: 0; line-height: 1.1; }
-  .programs-header .heading em { color: var(--burgundy); font-style: italic; }
-  .programs-header-rule { display: none; }
-  .programs-header-sub { font-size: .88rem; font-weight: 300; line-height: 1.75; color: var(--muted); margin-top: 10px; }
-  .programs-header-tag { display: inline-block; font-size: .46rem; letter-spacing: .48em; text-transform: uppercase; color: var(--rose); border: 1px solid rgba(199,54,95,.25); padding: 5px 12px; margin-bottom: 14px; }
-  .programs-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; padding: 0 80px; position: relative; z-index: 1; }
-  .prog-card { background: #fff; border: 1px solid rgba(139,21,56,.1); padding: 44px 36px 36px; position: relative; overflow: hidden; cursor: none; transition: transform .35s ease, box-shadow .35s ease; box-shadow: 0 2px 16px rgba(139,21,56,.05); }
-  .prog-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(to right, var(--burgundy), var(--rose)); }
-  .prog-card::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 0; background: linear-gradient(to top, rgba(212,165,165,.06), transparent); transition: height .4s ease; }
-  .prog-card:hover { transform: translateY(-6px); box-shadow: 0 20px 48px rgba(139,21,56,.12); }
-  .prog-card:hover::after { height: 100%; }
-  .prog-num { display: block; font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 300; line-height: 1; color: rgba(139,21,56,.1); margin-bottom: 8px; }
-  .prog-badge { display: inline-block; font-size: .44rem; letter-spacing: .5em; text-transform: uppercase; color: var(--rose); background: rgba(199,54,95,.07); border: 1px solid rgba(199,54,95,.2); padding: 5px 12px; margin-bottom: 20px; }
-  .prog-line { width: 28px; height: 2px; background: linear-gradient(to right, var(--burgundy), var(--rose)); margin-bottom: 18px; transition: width .4s ease; }
-  .prog-card:hover .prog-line { width: 52px; }
-  .prog-name { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.5rem,1.9vw,2rem); font-weight: 400; font-style: italic; color: var(--ink); margin-bottom: 14px; line-height: 1.15; transition: color .3s; }
+  .programs-wrap { padding: 0; background: #fdf7f3; position: relative; overflow: hidden; border-top: 1px solid var(--sand); }
+  .programs-wrap::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(rgba(139,21,56,.055) 1.5px, transparent 1.5px); background-size: 26px 26px; pointer-events: none; z-index: 0; }
+  .programs-wrap::after { content: ''; position: absolute; top: -80px; right: -80px; width: 360px; height: 360px; background: radial-gradient(circle, rgba(212,165,165,.24) 0%, transparent 65%); pointer-events: none; z-index: 0; }
+  .programs-header { padding: 80px 80px 60px; position: relative; z-index: 1; display: flex; justify-content: space-between; align-items: flex-end; }
+  .prog-eyebrow-row { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+  .prog-eyebrow-line { width: 32px; height: 1px; background: var(--rose); flex-shrink: 0; }
+  .prog-eyebrow-text { font-family: 'DM Sans', sans-serif; font-size: .5rem; letter-spacing: .52em; text-transform: uppercase; color: var(--rose); }
+  .programs-heading { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 4.6vw, 5.4rem); font-weight: 300; color: var(--ink); line-height: 1.0; margin: 0; }
+  .programs-heading em { color: var(--burgundy); font-style: italic; }
+  .programs-header-right { max-width: 300px; text-align: right; }
+  .programs-header-tag { display: inline-block; font-family: 'DM Sans', sans-serif; font-size: .46rem; letter-spacing: .44em; text-transform: uppercase; color: #fff; background: var(--burgundy); padding: 7px 14px; margin-bottom: 14px; }
+  .programs-header-sub { font-size: .88rem; font-weight: 300; line-height: 1.75; color: var(--muted); }
+  .programs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: 0 80px; position: relative; z-index: 1; }
+  .prog-card { background: #fff; border: 1.5px solid rgba(139,21,56,.1); padding: 38px 40px 34px; position: relative; overflow: hidden; cursor: none; transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s ease; box-shadow: 0 3px 22px rgba(139,21,56,.06); }
+  .prog-card:last-child { grid-column: 1 / -1; }
+  .prog-card:hover { transform: translateY(-6px) rotate(.22deg); box-shadow: 0 28px 64px rgba(139,21,56,.14); }
+  /* Left accent bar slides down on hover */
+  .prog-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 0; background: linear-gradient(to bottom, var(--burgundy), var(--rose)); transition: height .45s ease; z-index: 2; }
+  .prog-card:hover::before { height: 100%; }
+  /* Shimmer sweep on hover */
+  .prog-card::after { content: ''; position: absolute; top: 0; left: -100%; width: 55%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,.55), transparent); transform: skewX(-18deg); transition: left .65s ease; pointer-events: none; }
+  .prog-card:hover::after { left: 145%; }
+  .prog-card-top { display: flex; align-items: flex-start; gap: 22px; margin-bottom: 22px; }
+  .prog-icon-box { width: 80px; height: 80px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--burgundy); color: #fff; line-height: 1; }
+  .prog-icon-initials { font-family: 'Cormorant Garamond', serif; font-size: 1.55rem; font-weight: 500; letter-spacing: .06em; }
+  .prog-icon-num { font-family: 'DM Sans', sans-serif; font-size: .38rem; letter-spacing: .28em; opacity: .6; margin-top: 6px; }
+  .prog-card-meta { flex: 1; padding-top: 3px; }
+  .prog-meta-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; flex-wrap: wrap; }
+  .prog-badge { display: inline-flex; align-items: center; gap: 7px; font-family: 'DM Sans', sans-serif; font-size: .44rem; letter-spacing: .36em; text-transform: uppercase; color: #fff; background: var(--burgundy); padding: 5px 12px; }
+  .prog-badge-dot { display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,.7); animation: prog-pulse 1.7s ease-in-out infinite; flex-shrink: 0; }
+  @keyframes prog-pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.3;transform:scale(.65)} }
+  .prog-theme { font-size: .76rem; font-weight: 300; color: var(--muted); }
+  .prog-name { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.7rem, 2.2vw, 2.3rem); font-weight: 600; color: var(--ink); line-height: 1.1; transition: color .3s; }
   .prog-card:hover .prog-name { color: var(--burgundy); }
-  .prog-desc { font-size: .86rem; font-weight: 300; color: var(--muted); line-height: 1.85; }
-  .prog-cta { display: inline-flex; align-items: center; gap: 8px; margin-top: 26px; font-size: .5rem; letter-spacing: .38em; text-transform: uppercase; color: rgba(199,54,95,0); transition: color .35s, gap .3s; position: relative; z-index: 1; }
-  .prog-cta::after { content: '→'; font-size: .85rem; }
-  .prog-card:hover .prog-cta { color: var(--rose); gap: 14px; }
-  .programs-footer { border-top: 1px solid var(--sand); margin-top: 56px; padding: 44px 80px; display: flex; justify-content: center; position: relative; z-index: 1; background: transparent; }
+  .prog-sep { width: 100%; height: 1px; background: var(--sand); margin: 20px 0; }
+  .prog-desc { font-size: .88rem; font-weight: 300; color: var(--muted); line-height: 1.88; }
+  .prog-footer-row { display: flex; align-items: center; gap: 10px; margin-top: 22px; flex-wrap: wrap; }
+  .prog-circles { display: flex; }
+  .prog-circle { width: 30px; height: 30px; border-radius: 50%; background: var(--burgundy); border: 2.5px solid #fff; display: flex; align-items: center; justify-content: center; font-family: 'DM Sans', sans-serif; font-size: .5rem; font-weight: 700; color: #fff; margin-left: -7px; box-shadow: 0 1px 5px rgba(0,0,0,.12); }
+  .prog-circle:first-child { margin-left: 0; }
+  .prog-format { font-family: 'DM Sans', sans-serif; font-size: .78rem; font-weight: 600; color: var(--ink); margin-left: 4px; }
+  .prog-format-sep { color: rgba(139,21,56,.2); font-size: .75rem; }
+  .prog-format-detail { font-size: .78rem; font-weight: 300; color: var(--muted); }
+  .prog-cta-arrow { margin-left: auto; display: inline-flex; align-items: center; gap: 8px; font-family: 'DM Sans', sans-serif; font-size: .5rem; letter-spacing: .36em; text-transform: uppercase; color: var(--rose); opacity: 0; transition: opacity .35s, gap .3s; }
+  .prog-cta-arrow::after { content: '→'; font-size: .85rem; }
+  .prog-card:hover .prog-cta-arrow { opacity: 1; gap: 14px; }
+  /* Wide 3rd card horizontal layout */
+  .prog-card-wide .prog-card-body { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+  .prog-deco { display: flex; align-items: flex-end; justify-content: flex-end; }
+  .prog-deco-text { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 4vw, 5rem); font-weight: 300; font-style: italic; color: rgba(139,21,56,.09); line-height: 1.1; text-align: right; user-select: none; transition: color .4s; }
+  .prog-card-wide:hover .prog-deco-text { color: rgba(139,21,56,.14); }
+  .programs-footer { border-top: 1px solid var(--sand); margin-top: 56px; padding: 44px 80px; display: flex; justify-content: center; position: relative; z-index: 1; }
 
   /* EVENTS */
   .events-wrap { padding: 130px 80px; background: var(--sand); }
@@ -239,10 +262,12 @@
     .join-wrap { grid-template-columns: 1fr; padding: 80px 24px; gap: 48px; }
     .nl-wrap { padding: 100px 24px; }
     .events-wrap { padding: 60px 24px; }
+    .programs-header { padding: 48px 24px 40px; flex-direction: column; align-items: flex-start; gap: 24px; }
+    .programs-header-right { text-align: left; max-width: 100%; }
     .programs-grid { grid-template-columns: 1fr; padding: 0 24px; }
-    .programs-header { padding: 48px 24px 36px; }
-    .programs-header-top { flex-direction: column; align-items: flex-start; gap: 24px; }
-    .programs-header-right { text-align: left; }
+    .prog-card:last-child { grid-column: 1; }
+    .prog-card-wide .prog-card-body { grid-template-columns: 1fr; }
+    .prog-deco { display: none; }
     .programs-footer { padding: 32px 24px; margin-top: 36px; }
     .events-grid { grid-template-columns: 1fr; }
     .pillars { grid-template-columns: 1fr; }
@@ -362,45 +387,122 @@
 <!-- PROGRAMS -->
 <div class="programs-wrap" id="programs">
   <div class="programs-header reveal">
-    <div class="programs-header-top">
-      <div class="programs-header-left">
-        <span class="eyebrow">What We Offer</span>
-        <h2 class="heading">Programs &amp;<br><em>Experiences</em></h2>
+    <div class="programs-header-left">
+      <div class="prog-eyebrow-row">
+        <span class="prog-eyebrow-line"></span>
+        <span class="prog-eyebrow-text">What We Offer</span>
       </div>
-      <div class="programs-header-right">
-        <span class="programs-header-tag">For Every Founder</span>
-        <p class="programs-header-sub">Three pillars designed to move you forward — wherever you are in your founder journey.</p>
-      </div>
+      <h2 class="programs-heading">Programs &amp;<br><em>Experiences</em></h2>
+    </div>
+    <div class="programs-header-right">
+      <span class="programs-header-tag">For Every Founder</span>
+      <p class="programs-header-sub">Three pillars designed to move you forward — wherever you are in your founder journey.</p>
     </div>
   </div>
+
   <div class="programs-grid">
+
+    <!-- Card 1: Mentorship Circle -->
     <div class="prog-card reveal">
-      <span class="prog-num">01</span>
-      <span class="prog-badge">Coming Soon</span>
-      <div class="prog-line"></div>
-      <div class="prog-name">Mentorship Circle</div>
+      <div class="prog-card-top">
+        <div class="prog-icon-box">
+          <span class="prog-icon-initials">M·C</span>
+          <span class="prog-icon-num">2025</span>
+        </div>
+        <div class="prog-card-meta">
+          <div class="prog-meta-row">
+            <span class="prog-badge"><span class="prog-badge-dot"></span>Coming Soon</span>
+            <span class="prog-theme">Growth · Mentorship</span>
+          </div>
+          <div class="prog-name">Mentorship Circle</div>
+        </div>
+      </div>
       <p class="prog-desc">Intimate, curated sessions connecting founders with seasoned mentors for candid, high-impact guidance across strategy, fundraising, and growth.</p>
-      <span class="prog-cta">Explore</span>
+      <div class="prog-sep"></div>
+      <div class="prog-footer-row">
+        <div class="prog-circles">
+          <span class="prog-circle">F</span>
+          <span class="prog-circle">F</span>
+          <span class="prog-circle">C</span>
+        </div>
+        <span class="prog-format">Curated Sessions</span>
+        <span class="prog-format-sep">·</span>
+        <span class="prog-format-detail">Riyadh, Saudi Arabia</span>
+        <span class="prog-cta-arrow">Explore</span>
+      </div>
     </div>
+
+    <!-- Card 2: Founder Bootcamp -->
     <div class="prog-card reveal">
-      <span class="prog-num">02</span>
-      <span class="prog-badge">Coming Soon</span>
-      <div class="prog-line"></div>
-      <div class="prog-name">Founder Bootcamp</div>
+      <div class="prog-card-top">
+        <div class="prog-icon-box">
+          <span class="prog-icon-initials">F·B</span>
+          <span class="prog-icon-num">2025</span>
+        </div>
+        <div class="prog-card-meta">
+          <div class="prog-meta-row">
+            <span class="prog-badge"><span class="prog-badge-dot"></span>Coming Soon</span>
+            <span class="prog-theme">Skills · Validation</span>
+          </div>
+          <div class="prog-name">Founder Bootcamp</div>
+        </div>
+      </div>
       <p class="prog-desc">Intensive, hands-on programs to sharpen your skills, validate ideas, and fast-track growth with expert facilitators and peer cohorts.</p>
-      <span class="prog-cta">Explore</span>
+      <div class="prog-sep"></div>
+      <div class="prog-footer-row">
+        <div class="prog-circles">
+          <span class="prog-circle">F</span>
+          <span class="prog-circle">B</span>
+          <span class="prog-circle">C</span>
+        </div>
+        <span class="prog-format">Intensive Program</span>
+        <span class="prog-format-sep">·</span>
+        <span class="prog-format-detail">Cohort-based</span>
+        <span class="prog-cta-arrow">Explore</span>
+      </div>
     </div>
-    <div class="prog-card reveal">
-      <span class="prog-num">03</span>
-      <span class="prog-badge">Coming Soon</span>
-      <div class="prog-line"></div>
-      <div class="prog-name">Network Events</div>
-      <p class="prog-desc">Exclusive VIP dinners, launch gatherings, and community events where meaningful connections are forged over exceptional evenings in Riyadh.</p>
-      <span class="prog-cta">Explore</span>
+
+    <!-- Card 3: Network Events — wide horizontal -->
+    <div class="prog-card prog-card-wide reveal">
+      <div class="prog-card-body">
+        <div>
+          <div class="prog-card-top">
+            <div class="prog-icon-box">
+              <span class="prog-icon-initials">N·E</span>
+              <span class="prog-icon-num">2025</span>
+            </div>
+            <div class="prog-card-meta">
+              <div class="prog-meta-row">
+                <span class="prog-badge"><span class="prog-badge-dot"></span>Coming Soon</span>
+                <span class="prog-theme">Community · Connection</span>
+              </div>
+              <div class="prog-name">Network Events</div>
+            </div>
+          </div>
+          <p class="prog-desc">Exclusive VIP dinners, launch gatherings, and community events where meaningful connections are forged over exceptional evenings in Riyadh.</p>
+          <div class="prog-sep"></div>
+          <div class="prog-footer-row">
+            <div class="prog-circles">
+              <span class="prog-circle">N</span>
+              <span class="prog-circle">L</span>
+              <span class="prog-circle">R</span>
+            </div>
+            <span class="prog-format">VIP · Invite Only</span>
+            <span class="prog-format-sep">·</span>
+            <span class="prog-format-detail">Limited Seats</span>
+            <span class="prog-cta-arrow">Explore</span>
+          </div>
+        </div>
+        <div class="prog-deco">
+          <span class="prog-deco-text">Riyadh,<br>Saudi Arabia</span>
+        </div>
+      </div>
     </div>
+
   </div>
+
   <div class="programs-footer reveal">
-    <a href="#join" class="btn-primary" style="background:transparent;border:1px solid rgba(139,21,56,.3);color:var(--burgundy);font-size:.6rem;letter-spacing:.3em;padding:16px 48px;"><span>View All Programs</span></a>
+    <a href="#join" class="btn-primary" style="background:transparent;border:1.5px solid rgba(139,21,56,.3);color:var(--burgundy);font-size:.6rem;letter-spacing:.3em;padding:16px 48px;"><span>View All Programs</span></a>
   </div>
 </div>
 
