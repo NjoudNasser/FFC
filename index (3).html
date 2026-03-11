@@ -615,7 +615,8 @@ const counterObs = new IntersectionObserver(([e], obs) => {
     const tmr = setInterval(()=>{ c=Math.min(c+step,t); n.textContent=Math.floor(c)+'+'; if(c>=t){n.textContent=t+'+';clearInterval(tmr);}},22);
   });
 },{threshold:.25});
-counterObs.observe(document.querySelector('.stats-bar'));
+const statsBarEl = document.querySelector('.stats-bar');
+if (statsBarEl) counterObs.observe(statsBarEl);
 
 
 // THREE.JS
@@ -850,7 +851,6 @@ counterObs.observe(document.querySelector('.stats-bar'));
     stars.forEach(s   => { s.tick(); s.draw(); });
     shoots.forEach(sh => { sh.tick(); sh.draw(); });
   })();
-})();
 })();
 
 // ===== CREATIVE TRANSITIONS =====
