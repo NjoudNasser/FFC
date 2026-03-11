@@ -126,12 +126,22 @@
   .about-heading { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem,3.2vw,3.8rem); font-weight: 300; line-height: 1.1; color: var(--ink); margin-bottom: 24px; }
   .about-heading em { font-style: italic; color: var(--burgundy); }
   .about-body { font-size: .94rem; font-weight: 300; line-height: 1.9; color: var(--muted); margin-bottom: 48px; max-width: 400px; }
-  .about-pillars { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--sand); }
-  .about-pillar { padding: 24px 16px 24px 0; border-bottom: 1px solid var(--sand); }
-  .about-pillar:nth-child(even) { padding-left: 20px; padding-right: 0; border-left: 1px solid var(--sand); }
-  .about-pillar:nth-last-child(-n+2) { border-bottom: none; }
-  .about-pillar-name { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 500; color: var(--ink); margin-bottom: 5px; }
-  .about-pillar-desc { font-size: .79rem; font-weight: 300; color: var(--muted); line-height: 1.72; }
+  .about-pillars { display: grid; grid-template-columns: repeat(4,1fr); margin-top: 44px; border: 1px solid rgba(28,20,16,.1); }
+  .about-pillar { padding: 36px 28px 40px; position: relative; overflow: hidden; cursor: default; border-right: 1px solid rgba(28,20,16,.1); transition: background .45s cubic-bezier(.16,1,.3,1); }
+  .about-pillar:last-child { border-right: none; }
+  .about-pillar::after { content: ''; position: absolute; inset: 0; background: var(--burgundy); transform: scaleY(0); transform-origin: bottom; transition: transform .5s cubic-bezier(.16,1,.3,1); z-index: 0; }
+  .about-pillar:hover::after { transform: scaleY(1); }
+  .about-pillar > * { position: relative; z-index: 1; }
+  .about-pillar-num { display: block; font-family: 'DM Sans', sans-serif; font-size: .5rem; letter-spacing: .5em; color: var(--rose); margin-bottom: 40px; transition: color .4s; }
+  .about-pillar:hover .about-pillar-num { color: rgba(255,248,245,.4); }
+  .about-pillar-icon { display: block; font-size: 1.6rem; margin-bottom: 18px; line-height: 1; transition: transform .45s cubic-bezier(.16,1,.3,1), color .4s; color: var(--burgundy); }
+  .about-pillar:hover .about-pillar-icon { transform: translateY(-4px) scale(1.1); color: rgba(255,248,245,.35); }
+  .about-pillar-name { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.55rem,1.8vw,2rem); font-weight: 400; color: var(--ink); margin-bottom: 14px; line-height: 1.05; transition: color .4s; }
+  .about-pillar:hover .about-pillar-name { color: var(--cream); }
+  .about-pillar-desc { font-size: .8rem; font-weight: 300; color: var(--muted); line-height: 1.82; transition: color .4s; }
+  .about-pillar:hover .about-pillar-desc { color: rgba(255,248,245,.72); }
+  .about-pillar-arrow { display: block; margin-top: 28px; font-size: .55rem; letter-spacing: .3em; text-transform: uppercase; color: var(--rose); opacity: 0; transform: translateX(-8px); transition: opacity .4s, transform .4s, color .4s; }
+  .about-pillar:hover .about-pillar-arrow { opacity: 1; transform: translateX(0); color: rgba(255,248,245,.6); }
   /* IMPACT BAND */
   .impact-band { background: linear-gradient(135deg, #0e0408 0%, #1a0810 50%, #0e0408 100%); padding: 120px 80px; text-align: center; position: relative; overflow: hidden; }
   .impact-band::before { content: ''; position: absolute; top: -200px; left: 50%; transform: translateX(-50%); width: 700px; height: 700px; background: radial-gradient(circle, rgba(139,21,56,.2) 0%, transparent 70%); pointer-events: none; }
@@ -365,20 +375,32 @@
     <p class="about-body">Female Founder Collective is a Saudi-based network dedicated to supporting, developing, and elevating women in business. We believe every woman deserves the tools, community, and visibility to build the future she envisions — right here in the Kingdom.</p>
     <div class="about-pillars">
       <div class="about-pillar">
+        <span class="about-pillar-num">01</span>
+        <span class="about-pillar-icon">◈</span>
         <div class="about-pillar-name">Community</div>
         <p class="about-pillar-desc">Connect with a powerful network of women who lift each other up.</p>
+        <span class="about-pillar-arrow">Explore →</span>
       </div>
       <div class="about-pillar">
+        <span class="about-pillar-num">02</span>
+        <span class="about-pillar-icon">△</span>
         <div class="about-pillar-name">Growth</div>
         <p class="about-pillar-desc">Access resources, mentorship, and programs designed for your success.</p>
+        <span class="about-pillar-arrow">Explore →</span>
       </div>
       <div class="about-pillar">
+        <span class="about-pillar-num">03</span>
+        <span class="about-pillar-icon">◇</span>
         <div class="about-pillar-name">Innovation</div>
         <p class="about-pillar-desc">Challenge the status quo and build businesses that change Saudi Arabia.</p>
+        <span class="about-pillar-arrow">Explore →</span>
       </div>
       <div class="about-pillar">
+        <span class="about-pillar-num">04</span>
+        <span class="about-pillar-icon">◉</span>
         <div class="about-pillar-name">Impact</div>
         <p class="about-pillar-desc">Create lasting change for women in the Saudi business landscape.</p>
+        <span class="about-pillar-arrow">Explore →</span>
       </div>
     </div>
   </div>
@@ -397,8 +419,6 @@
       <h2 class="programs-heading">Programs &amp;<br><em>Experiences</em></h2>
     </div>
     <div class="programs-header-right">
-      <span class="programs-header-tag">For Every Founder</span>
-      <p class="programs-header-sub">Three pillars designed to move you forward — wherever you are in your founder journey.</p>
     </div>
   </div>
 
@@ -504,7 +524,7 @@
 <div class="events-wrap" id="events">
   <div class="events-top">
     <div class="reveal"><span class="eyebrow">Upcoming</span><h2 class="heading" style="margin-bottom:0;">Events &<br><em>Gatherings</em></h2></div>
-    <a href="#" class="text-link reveal" style="margin-top:0;">View All</a>
+
   </div>
   <div class="events-grid">
     <div class="event-card reveal">
