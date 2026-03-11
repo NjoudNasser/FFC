@@ -651,7 +651,7 @@ counterObs.observe(document.querySelector('.stats-bar'));
   window.addEventListener('resize',()=>{ cam.aspect=innerWidth/innerHeight; cam.updateProjectionMatrix(); renderer.setSize(innerWidth,innerHeight); });
 })();
 
-// NEWSLETTER STARFIELD — floating 4-point sparkle stars on pure black
+// NEWSLETTER STARFIELD — deep stargazing sky with sparkles, shooting stars & nebula glow
 (function(){
   const canvas = document.getElementById('nl-stars');
   if (!canvas) return;
@@ -659,114 +659,196 @@ counterObs.observe(document.querySelector('.stats-bar'));
   let W = 0, H = 0;
 
   function resize() {
-    const r = canvas.parentElement.getBoundingClientRect();
-    W = canvas.width  = Math.round(r.width);
-    H = canvas.height = Math.round(r.height);
+    W = canvas.width  = canvas.parentElement.offsetWidth  || window.innerWidth;
+    H = canvas.height = canvas.parentElement.offsetHeight || 600;
   }
   resize();
+  window.addEventListener('resize', () => { resize(); init(); }, {passive:true});
 
-  // Size distribution: mostly tiny dots, some sparkles, few large
+  // Star color palette — white, warm rose, soft gold
+  const PALETTES = [
+    [255,255,255], [255,255,255], [255,255,255], // mostly white
+    [255,200,200], [255,220,180], [212,165,165],  // warm rose/gold
+    [200,180,255], [180,220,255]                  // cool blue-white
+  ];
+
+  function pickColor() { return PALETTES[Math.floor(Math.random() * PALETTES.length)]; }
   function pickSize() {
     const r = Math.random();
-    if (r < .52) return .2  + Math.random() * .7;   // tiny dot
-    if (r < .78) return 1.1 + Math.random() * 1.6;  // small sparkle
-    if (r < .94) return 2.8 + Math.random() * 2.4;  // medium sparkle
-    return 5.5 + Math.random() * 4.5;                // large sparkle
+    if (r < .55) return .15 + Math.random() * .55;  // tiny
+    if (r < .78) return .9  + Math.random() * 1.2;  // small
+    if (r < .93) return 2.2 + Math.random() * 2.0;  // medium sparkle
+    return 4.5 + Math.random() * 4.0;               // large sparkle
   }
 
   class Star {
     constructor() { this.reset(true); }
     reset(scatter) {
-      this.x  = scatter ? Math.random() * W : (Math.random() < .5 ? -8 : W + 8);
+      this.x  = scatter ? Math.random() * W : -10;
       this.y  = scatter ? Math.random() * H : Math.random() * H;
-      const spd = .06 + Math.random() * .22;
-      const ang = Math.random() * Math.PI * 2;
-      this.vx = Math.cos(ang) * spd;
-      this.vy = Math.sin(ang) * spd;
-      this.sz   = pickSize();
-      this.base = .3 + Math.random() * .7;
-      this.tp   = Math.random() * Math.PI * 2;
-      this.ts   = this.sz > 3 ? .006 + Math.random() * .01 : .02 + Math.random() * .04;
+      const spd = .03 + Math.random() * .12;
+      const ang = scatter ? Math.random() * Math.PI * 2 : (Math.random() * .3 - .15);
+      this.vx  = Math.cos(ang) * spd;
+      this.vy  = Math.sin(ang) * spd * .4;
+      this.sz  = pickSize();
+      this.col = pickColor();
+      this.base = .25 + Math.random() * .75;
+      this.tp  = Math.random() * Math.PI * 2;
+      this.ts  = this.sz > 3 ? .004 + Math.random() * .008 : .018 + Math.random() * .035;
     }
     tick() {
       this.x += this.vx; this.y += this.vy; this.tp += this.ts;
-      if (this.x < -25) this.x = W + 15;
-      if (this.x > W+25) this.x = -15;
-      if (this.y < -25) this.y = H + 15;
-      if (this.y > H+25) this.y = -15;
+      if (this.x > W + 20) this.reset(false);
+      if (this.x < -20) this.x = W + 10;
+      if (this.y < -20) this.y = H + 10;
+      if (this.y > H + 20) this.y = -10;
     }
     draw() {
-      const tw    = .4 + .6 * Math.sin(this.tp);
+      const tw    = .35 + .65 * Math.abs(Math.sin(this.tp));
       const alpha = this.base * tw;
+      const [r, g, b] = this.col;
       const sz    = this.sz;
 
-      // Tiny dot: soft glowing pixel only
-      if (sz < 1.1) {
-        const gr = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, sz * 4);
-        gr.addColorStop(0, `rgba(255,255,255,${alpha})`);
-        gr.addColorStop(1, 'rgba(0,0,0,0)');
-        ctx.beginPath(); ctx.arc(this.x, this.y, sz * 4, 0, Math.PI*2);
+      if (sz < .9) {
+        const gr = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, sz * 5);
+        gr.addColorStop(0,   `rgba(${r},${g},${b},${alpha})`);
+        gr.addColorStop(.4,  `rgba(${r},${g},${b},${alpha * .3})`);
+        gr.addColorStop(1,   'rgba(0,0,0,0)');
+        ctx.beginPath(); ctx.arc(this.x, this.y, sz * 5, 0, Math.PI*2);
         ctx.fillStyle = gr; ctx.fill();
-        ctx.beginPath(); ctx.arc(this.x, this.y, Math.max(.35, sz * .45), 0, Math.PI*2);
-        ctx.fillStyle = `rgba(255,255,255,${alpha})`; ctx.fill();
+        ctx.beginPath(); ctx.arc(this.x, this.y, Math.max(.3, sz * .5), 0, Math.PI*2);
+        ctx.fillStyle = `rgba(${r},${g},${b},${alpha})`; ctx.fill();
         return;
       }
 
-      // Outer glow halo
-      const hR   = sz * 5;
+      // Halo glow
+      const hR   = sz * 6;
       const halo = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, hR);
-      halo.addColorStop(0,   `rgba(255,255,255,${alpha * .30})`);
-      halo.addColorStop(.35, `rgba(255,255,255,${alpha * .08})`);
+      halo.addColorStop(0,   `rgba(${r},${g},${b},${alpha * .28})`);
+      halo.addColorStop(.4,  `rgba(${r},${g},${b},${alpha * .08})`);
       halo.addColorStop(1,   'rgba(0,0,0,0)');
       ctx.beginPath(); ctx.arc(this.x, this.y, hR, 0, Math.PI*2);
       ctx.fillStyle = halo; ctx.fill();
 
-      // Draw one tapered sparkle arm
+      // 4-point sparkle arms
       const arm = (x0, y0, x1, y1, lw) => {
         const gd = ctx.createLinearGradient(x0, y0, x1, y1);
-        gd.addColorStop(0,  'rgba(255,255,255,0)');
-        gd.addColorStop(.5, `rgba(255,255,255,${alpha})`);
-        gd.addColorStop(1,  'rgba(255,255,255,0)');
+        gd.addColorStop(0,   'rgba(0,0,0,0)');
+        gd.addColorStop(.5,  `rgba(${r},${g},${b},${alpha})`);
+        gd.addColorStop(1,   'rgba(0,0,0,0)');
         ctx.beginPath(); ctx.moveTo(x0, y0); ctx.lineTo(x1, y1);
         ctx.strokeStyle = gd; ctx.lineWidth = lw; ctx.stroke();
       };
-
-      // Main cross — length pulses with twinkle
-      const aL  = sz * (sz > 3 ? 1.5 : 1.2) * tw;
-      const lw1 = Math.max(.5, sz * .20);
-      arm(this.x - aL, this.y,       this.x + aL, this.y,       lw1);
-      arm(this.x,       this.y - aL, this.x,       this.y + aL, lw1);
-
-      // Shorter diagonal arms for 4-point ✦ look
-      if (sz > 1.8) {
-        const dL  = aL * .42;
-        const lw2 = Math.max(.3, sz * .10);
-        arm(this.x - dL, this.y - dL, this.x + dL, this.y + dL, lw2);
-        arm(this.x + dL, this.y - dL, this.x - dL, this.y + dL, lw2);
+      const aL  = sz * (sz > 3 ? 1.6 : 1.3) * tw;
+      const lw1 = Math.max(.4, sz * .22);
+      arm(this.x - aL, this.y,      this.x + aL, this.y,      lw1);
+      arm(this.x,      this.y - aL, this.x,      this.y + aL, lw1);
+      if (sz > 1.5) {
+        const dL = aL * .45, lw2 = Math.max(.25, sz * .1);
+        arm(this.x-dL, this.y-dL, this.x+dL, this.y+dL, lw2);
+        arm(this.x+dL, this.y-dL, this.x-dL, this.y+dL, lw2);
       }
 
-      // Bright white center core
+      // Bright core
       ctx.beginPath();
-      ctx.arc(this.x, this.y, Math.max(.5, sz * .22), 0, Math.PI*2);
-      ctx.fillStyle = `rgba(255,255,255,${Math.min(1, alpha * 1.4)})`;
+      ctx.arc(this.x, this.y, Math.max(.45, sz * .24), 0, Math.PI*2);
+      ctx.fillStyle = `rgba(${r},${g},${b},${Math.min(1, alpha * 1.5)})`;
       ctx.fill();
     }
   }
 
-  const stars = Array.from({length: 155}, () => new Star());
+  // Shooting star
+  class Shoot {
+    constructor() { this.reset(); this.active = false; this.delay = Math.random() * 300; }
+    reset() {
+      this.x  = Math.random() * W * .7;
+      this.y  = Math.random() * H * .4;
+      this.len = 80 + Math.random() * 120;
+      this.spd = 6 + Math.random() * 8;
+      this.ang = .3 + Math.random() * .3;
+      this.vx  = Math.cos(this.ang) * this.spd;
+      this.vy  = Math.sin(this.ang) * this.spd;
+      this.life = 0; this.maxLife = 30 + Math.random() * 20;
+      this.active = true;
+    }
+    tick() {
+      if (this.delay > 0) { this.delay--; return; }
+      if (!this.active) { if (Math.random() < .003) this.reset(); return; }
+      this.x += this.vx; this.y += this.vy; this.life++;
+      if (this.life > this.maxLife) { this.active = false; this.delay = 200 + Math.random() * 400; }
+    }
+    draw() {
+      if (!this.active || this.delay > 0) return;
+      const prog = this.life / this.maxLife;
+      const alpha = prog < .2 ? prog / .2 : prog > .75 ? (1 - prog) / .25 : 1;
+      const tailX = this.x - this.vx * (this.len / this.spd);
+      const tailY = this.y - this.vy * (this.len / this.spd);
+      const gd = ctx.createLinearGradient(tailX, tailY, this.x, this.y);
+      gd.addColorStop(0, 'rgba(0,0,0,0)');
+      gd.addColorStop(.6, `rgba(212,165,165,${alpha * .4})`);
+      gd.addColorStop(1, `rgba(255,255,255,${alpha})`);
+      ctx.beginPath(); ctx.moveTo(tailX, tailY); ctx.lineTo(this.x, this.y);
+      ctx.strokeStyle = gd; ctx.lineWidth = 1.2; ctx.stroke();
+      ctx.beginPath(); ctx.arc(this.x, this.y, 1.5, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(255,255,255,${alpha})`; ctx.fill();
+    }
+  }
+
+  // Nebula blobs — slow-drifting coloured glows
+  class Nebula {
+    constructor() {
+      this.x  = Math.random() * W; this.y  = Math.random() * H;
+      this.rx = 80 + Math.random() * 160; this.ry = 60 + Math.random() * 120;
+      const cols = [[139,21,56],[90,16,40],[60,30,80],[20,30,70]];
+      this.col = cols[Math.floor(Math.random() * cols.length)];
+      this.a  = .04 + Math.random() * .06;
+      this.tp = Math.random() * Math.PI * 2; this.ts = .0008 + Math.random() * .001;
+      this.vx = (.5 - Math.random()) * .08; this.vy = (.5 - Math.random()) * .05;
+    }
+    tick() {
+      this.tp += this.ts; this.x += this.vx; this.y += this.vy;
+      if (this.x < -this.rx) this.x = W + this.rx;
+      if (this.x > W + this.rx) this.x = -this.rx;
+      if (this.y < -this.ry) this.y = H + this.ry;
+      if (this.y > H + this.ry) this.y = -this.ry;
+    }
+    draw() {
+      const pulse = .6 + .4 * Math.sin(this.tp);
+      const [r,g,b] = this.col;
+      ctx.save();
+      ctx.translate(this.x, this.y);
+      ctx.scale(1, this.ry / this.rx);
+      const gr = ctx.createRadialGradient(0, 0, 0, 0, 0, this.rx);
+      gr.addColorStop(0,   `rgba(${r},${g},${b},${this.a * pulse})`);
+      gr.addColorStop(.5,  `rgba(${r},${g},${b},${this.a * pulse * .4})`);
+      gr.addColorStop(1,   'rgba(0,0,0,0)');
+      ctx.beginPath(); ctx.arc(0, 0, this.rx, 0, Math.PI*2);
+      ctx.fillStyle = gr; ctx.fill();
+      ctx.restore();
+    }
+  }
+
+  let stars, shoots, nebulas;
+  function init() {
+    stars   = Array.from({length: 320}, () => new Star());
+    shoots  = Array.from({length: 4},   () => new Shoot());
+    nebulas = Array.from({length: 6},   () => new Nebula());
+  }
+  init();
 
   let visible = false;
-  new IntersectionObserver(([e]) => { visible = e.isIntersecting; }, {threshold: .04})
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; }, {threshold: .02})
     .observe(canvas.parentElement);
-
-  window.addEventListener('resize', () => { resize(); stars.forEach(s => s.reset(true)); });
 
   (function frame() {
     requestAnimationFrame(frame);
     if (!visible) return;
-    ctx.fillStyle = '#000';
+    // Deep space background
+    ctx.fillStyle = '#04010a';
     ctx.fillRect(0, 0, W, H);
-    stars.forEach(s => { s.tick(); s.draw(); });
+    nebulas.forEach(n => { n.tick(); n.draw(); });
+    stars.forEach(s   => { s.tick(); s.draw(); });
+    shoots.forEach(sh => { sh.tick(); sh.draw(); });
   })();
 })();
 })();
