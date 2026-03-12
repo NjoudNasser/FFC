@@ -32,13 +32,14 @@
     /* ── LEFT PANEL ── */
     .left-panel {
       background: var(--ink);
-      position: relative;
+      position: sticky;
+      top: 0;
+      height: 100vh;
       overflow: hidden;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       padding: 56px 64px;
-      min-height: 100vh;
     }
 
     .left-panel::before {
@@ -71,387 +72,270 @@
     }
 
     .lp-logo {
-      position: relative;
-      z-index: 1;
+      position: relative; z-index: 1;
       font-family: 'Playfair Display', serif;
-      font-size: 18px;
-      font-weight: 700;
-      color: white;
-      text-decoration: none;
+      font-size: 18px; font-weight: 700;
+      color: white; text-decoration: none;
     }
     .lp-logo em { font-style: italic; color: var(--gold); }
 
-    .lp-center {
-      position: relative;
-      z-index: 1;
-    }
+    .lp-center { position: relative; z-index: 1; }
 
     .lp-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: .22em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 28px;
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 10px; font-weight: 600; letter-spacing: .22em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 28px;
     }
     .lp-label::before {
-      content: '';
-      display: block;
-      width: 28px; height: 1px;
-      background: var(--gold);
-      opacity: .6;
+      content: ''; display: block; width: 28px; height: 1px;
+      background: var(--gold); opacity: .6;
     }
 
     .lp-heading {
       font-family: 'Playfair Display', serif;
       font-size: clamp(36px, 3.8vw, 54px);
-      font-weight: 900;
-      line-height: 1.08;
-      color: white;
-      margin-bottom: 24px;
+      font-weight: 900; line-height: 1.08; color: white; margin-bottom: 24px;
     }
     .lp-heading em { font-style: italic; color: var(--gold); }
 
     .lp-sub {
-      font-size: 15px;
-      line-height: 1.8;
-      color: rgba(255,255,255,.5);
-      max-width: 360px;
-      margin-bottom: 52px;
+      font-size: 15px; line-height: 1.8;
+      color: rgba(255,255,255,.5); max-width: 360px; margin-bottom: 52px;
     }
 
-    .lp-perks {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-    .lp-perk {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-    }
+    .lp-perks { display: flex; flex-direction: column; gap: 18px; }
+    .lp-perk { display: flex; align-items: flex-start; gap: 14px; }
     .lp-perk-icon {
-      width: 36px; height: 36px;
-      border-radius: 50%;
+      width: 36px; height: 36px; border-radius: 50%;
       border: 1px solid rgba(212,165,165,.3);
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
     .lp-perk-icon svg { width: 16px; height: 16px; stroke: var(--gold); stroke-width: 2; fill: none; }
-    .lp-perk-text strong {
-      display: block;
-      font-size: 14px;
-      font-weight: 600;
-      color: white;
-      margin-bottom: 2px;
-    }
-    .lp-perk-text span {
-      font-size: 12px;
-      color: rgba(255,255,255,.4);
-      line-height: 1.5;
-    }
+    .lp-perk-text strong { display: block; font-size: 14px; font-weight: 600; color: white; margin-bottom: 2px; }
+    .lp-perk-text span { font-size: 12px; color: rgba(255,255,255,.4); line-height: 1.5; }
 
-    .lp-bottom {
-      position: relative;
-      z-index: 1;
-    }
+    .lp-bottom { position: relative; z-index: 1; }
     .lp-quote {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: 14px;
-      line-height: 1.7;
-      color: rgba(255,255,255,.4);
-      border-left: 2px solid rgba(212,165,165,.3);
-      padding-left: 16px;
+      font-family: 'Playfair Display', serif; font-style: italic;
+      font-size: 14px; line-height: 1.7; color: rgba(255,255,255,.4);
+      border-left: 2px solid rgba(212,165,165,.3); padding-left: 16px;
     }
 
     /* ── RIGHT PANEL ── */
     .right-panel {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 60px 72px;
+      display: flex; flex-direction: column;
+      padding: 60px 72px 80px;
       background: var(--cream);
       overflow-y: auto;
     }
 
-    .form-header {
-      margin-bottom: 36px;
+    .form-header { margin-bottom: 36px; }
+    .back-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 12px; letter-spacing: .08em; color: var(--muted);
+      text-decoration: none; margin-bottom: 36px; transition: color .2s;
     }
-    .form-header .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 12px;
-      letter-spacing: .08em;
-      color: var(--muted);
-      text-decoration: none;
-      margin-bottom: 36px;
-      transition: color .2s;
-    }
-    .form-header .back-link:hover { color: var(--rose); }
-    .form-header .back-link svg { width: 14px; height: 14px; stroke: currentColor; stroke-width: 2; fill: none; }
+    .back-link:hover { color: var(--rose); }
+    .back-link svg { width: 14px; height: 14px; stroke: currentColor; stroke-width: 2; fill: none; }
 
     .form-title {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(26px, 3vw, 36px);
-      font-weight: 900;
-      color: var(--ink);
-      line-height: 1.1;
-      margin-bottom: 8px;
+      font-size: clamp(26px, 3vw, 36px); font-weight: 900;
+      color: var(--ink); line-height: 1.1; margin-bottom: 8px;
     }
     .form-title em { font-style: italic; color: var(--rose); }
+    .form-sub { font-size: 14px; color: var(--muted); line-height: 1.6; }
 
-    .form-sub {
-      font-size: 14px;
-      color: var(--muted);
-      line-height: 1.6;
-    }
+    /* ── FORM ELEMENTS ── */
+    .register-form { display: flex; flex-direction: column; }
 
-    /* ── FORM ── */
-    .register-form {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
 
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    .field {
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
-      margin-bottom: 20px;
-    }
-
+    .field { display: flex; flex-direction: column; gap: 7px; margin-bottom: 20px; }
     .field label {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--ink);
+      font-size: 11px; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--ink);
     }
 
     .field input,
     .field select,
     .field textarea {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      color: var(--ink);
-      background: white;
-      border: 1px solid var(--sand);
-      border-bottom: 2px solid var(--sand);
-      padding: 13px 16px;
-      outline: none;
+      font-family: 'DM Sans', sans-serif; font-size: 14px;
+      color: var(--ink); background: white;
+      border: 1px solid var(--sand); border-bottom: 2px solid var(--sand);
+      padding: 13px 16px; outline: none; width: 100%;
       transition: border-color .2s, box-shadow .2s;
-      width: 100%;
-      appearance: none;
-      -webkit-appearance: none;
+      appearance: none; -webkit-appearance: none;
     }
     .field input::placeholder,
     .field textarea::placeholder { color: rgba(122,101,96,.4); }
-
-    .field input:focus,
-    .field select:focus,
-    .field textarea:focus {
-      border-color: var(--rose);
-      border-bottom-color: var(--rose);
+    .field input:focus, .field select:focus, .field textarea:focus {
+      border-color: var(--rose); border-bottom-color: var(--rose);
       box-shadow: 0 4px 16px rgba(199,54,95,.08);
     }
-
     .field textarea { resize: none; min-height: 90px; line-height: 1.6; }
 
     .select-wrap { position: relative; }
     .select-wrap::after {
-      content: '▾';
-      position: absolute;
-      right: 14px; top: 50%;
-      transform: translateY(-50%);
-      color: var(--muted);
-      font-size: 12px;
-      pointer-events: none;
+      content: '▾'; position: absolute; right: 14px; top: 50%;
+      transform: translateY(-50%); color: var(--muted); font-size: 12px; pointer-events: none;
     }
     .select-wrap select { padding-right: 36px; cursor: pointer; }
 
-    .field-divider {
-      height: 1px;
-      background: var(--sand);
-      margin: 4px 0 24px;
-    }
+    .field-divider { height: 1px; background: var(--sand); margin: 4px 0 28px; }
 
     .field-section-label {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      color: var(--rose);
-      margin-bottom: 18px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .field-section-label::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--sand);
-    }
-
-    /* business toggle */
-    .business-toggle {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 16px 18px;
-      background: white;
-      border: 1px solid var(--sand);
-      cursor: pointer;
+      font-size: 10px; font-weight: 600; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--rose);
       margin-bottom: 20px;
-      transition: border-color .2s;
+      display: flex; align-items: center; gap: 10px;
     }
-    .business-toggle:hover { border-color: var(--rose); }
-    .business-toggle input[type="checkbox"] {
-      width: 18px; height: 18px;
-      accent-color: var(--burgundy);
-      flex-shrink: 0;
-      cursor: pointer;
-    }
-    .business-toggle-text strong {
-      display: block;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--ink);
-    }
-    .business-toggle-text span {
-      font-size: 12px;
-      color: var(--muted);
-    }
+    .field-section-label::after { content: ''; flex: 1; height: 1px; background: var(--sand); }
 
-    .business-fields {
-      display: none;
-      flex-direction: column;
-    }
-    .business-fields.visible { display: flex; }
-
-    /* checkboxes */
-    .checkbox-field {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      margin-bottom: 14px;
-      cursor: pointer;
-    }
-    .checkbox-field input[type="checkbox"] {
-      width: 18px; height: 18px;
+    /* ── BUSINESS TOGGLE ── */
+    .business-toggle-wrap {
       border: 1.5px solid var(--sand);
       background: white;
-      flex-shrink: 0;
-      margin-top: 1px;
-      accent-color: var(--burgundy);
-      cursor: pointer;
+      margin-bottom: 0;
+      overflow: hidden;
+      transition: border-color .25s;
     }
-    .checkbox-field span {
-      font-size: 13px;
-      line-height: 1.6;
-      color: var(--muted);
-    }
-    .checkbox-field span a {
-      color: var(--rose);
-      text-decoration: none;
-      border-bottom: 1px solid rgba(199,54,95,.3);
+    .business-toggle-wrap:focus-within { border-color: var(--rose); }
+
+    .toggle-header {
+      display: flex; align-items: center; gap: 16px;
+      padding: 18px 20px; cursor: pointer;
     }
 
-    /* submit button */
-    .submit-btn {
-      margin-top: 8px;
-      padding: 17px 40px;
-      background: var(--burgundy);
-      color: white;
-      border: none;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      cursor: pointer;
-      position: relative;
+    .toggle-switch {
+      position: relative; width: 44px; height: 24px; flex-shrink: 0;
+    }
+    .toggle-switch input { opacity: 0; width: 0; height: 0; position: absolute; }
+    .toggle-track {
+      position: absolute; inset: 0;
+      background: var(--sand); border-radius: 12px;
+      transition: background .25s;
+    }
+    .toggle-thumb {
+      position: absolute; top: 3px; left: 3px;
+      width: 18px; height: 18px; border-radius: 50%;
+      background: white; transition: transform .25s;
+      box-shadow: 0 1px 4px rgba(0,0,0,.18);
+    }
+    .toggle-switch input:checked ~ .toggle-track { background: var(--burgundy); }
+    .toggle-switch input:checked ~ .toggle-thumb { transform: translateX(20px); }
+
+    .toggle-label-text strong {
+      display: block; font-size: 14px; font-weight: 600; color: var(--ink);
+    }
+    .toggle-label-text span { font-size: 12px; color: var(--muted); }
+
+    /* ── BUSINESS FIELDS EXPAND ── */
+    .business-expand {
+      max-height: 0;
       overflow: hidden;
+      transition: max-height .5s cubic-bezier(.16,1,.3,1);
+    }
+    .business-expand.open { max-height: 2000px; }
+
+    .business-expand-inner {
+      padding: 0 20px 20px;
+      border-top: 1px solid var(--sand);
+      margin-top: 0;
+    }
+    .business-expand-inner .sub-section {
+      font-size: 9px; font-weight: 700; letter-spacing: .2em;
+      text-transform: uppercase; color: var(--muted);
+      margin: 20px 0 14px;
+    }
+
+    /* ── MULTI CHECKBOXES (support needed) ── */
+    .checkbox-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .check-pill {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 14px;
+      border: 1px solid var(--sand);
+      background: white; cursor: pointer;
+      font-size: 13px; color: var(--ink);
+      transition: border-color .2s, background .2s;
+      user-select: none;
+    }
+    .check-pill input { accent-color: var(--burgundy); cursor: pointer; flex-shrink: 0; }
+    .check-pill:has(input:checked) {
+      border-color: var(--burgundy);
+      background: rgba(139,21,56,.04);
+    }
+
+    /* ── BOTTOM CHECKBOXES ── */
+    .checkbox-field {
+      display: flex; align-items: flex-start; gap: 12px;
+      margin-bottom: 14px; cursor: pointer;
+    }
+    .checkbox-field input[type="checkbox"] {
+      width: 18px; height: 18px; border: 1.5px solid var(--sand);
+      background: white; flex-shrink: 0; margin-top: 1px;
+      accent-color: var(--burgundy); cursor: pointer;
+    }
+    .checkbox-field span { font-size: 13px; line-height: 1.6; color: var(--muted); }
+    .checkbox-field span a { color: var(--rose); text-decoration: none; border-bottom: 1px solid rgba(199,54,95,.3); }
+
+    /* ── SUBMIT ── */
+    .submit-btn {
+      margin-top: 8px; padding: 17px 40px;
+      background: var(--burgundy); color: white; border: none;
+      font-family: 'DM Sans', sans-serif; font-size: 13px;
+      font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+      cursor: pointer; position: relative; overflow: hidden;
       transition: background .3s, transform .2s, box-shadow .3s;
-      box-shadow: 0 4px 20px rgba(139,21,56,.3);
-      width: 100%;
+      box-shadow: 0 4px 20px rgba(139,21,56,.3); width: 100%;
     }
     .submit-btn::before {
-      content: '';
-      position: absolute;
-      top: 0; left: -75%;
+      content: ''; position: absolute; top: 0; left: -75%;
       width: 50%; height: 100%;
       background: linear-gradient(120deg, transparent, rgba(255,255,255,.18), transparent);
       transform: skewX(-20deg);
       animation: shimmer 2.8s ease-in-out infinite;
     }
-    .submit-btn:hover {
-      background: var(--rose);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(199,54,95,.4);
-    }
+    .submit-btn:hover { background: var(--rose); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(199,54,95,.4); }
     @keyframes shimmer {
       0%   { left: -75%; opacity: 0; }
       30%  { opacity: 1; }
       100% { left: 130%; opacity: 0; }
     }
 
-    .login-link {
-      text-align: center;
-      margin-top: 20px;
-      font-size: 13px;
-      color: var(--muted);
-    }
-    .login-link a {
-      color: var(--rose);
-      text-decoration: none;
-      font-weight: 500;
-      border-bottom: 1px solid rgba(199,54,95,.3);
-    }
+    .login-link { text-align: center; margin-top: 20px; font-size: 13px; color: var(--muted); }
+    .login-link a { color: var(--rose); text-decoration: none; font-weight: 500; border-bottom: 1px solid rgba(199,54,95,.3); }
 
-    /* success state */
+    /* ── SUCCESS ── */
     .success-state {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      padding: 60px 0;
-      gap: 20px;
+      display: none; flex-direction: column; align-items: center;
+      text-align: center; padding: 80px 0; gap: 20px;
     }
     .success-state.show { display: flex; }
     .success-ring {
-      width: 80px; height: 80px;
-      border-radius: 50%;
+      width: 80px; height: 80px; border-radius: 50%;
       background: linear-gradient(135deg, var(--burgundy), var(--rose));
       display: flex; align-items: center; justify-content: center;
     }
     .success-ring svg { width: 36px; height: 36px; stroke: white; stroke-width: 2.5; fill: none; }
-    .success-state h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 28px; font-weight: 700;
-      color: var(--ink);
-    }
+    .success-state h3 { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: var(--ink); }
     .success-state p { font-size: 15px; color: var(--muted); line-height: 1.7; max-width: 340px; }
 
-    /* responsive */
+    /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
       body { grid-template-columns: 1fr; }
-      .left-panel { min-height: auto; padding: 48px 36px; }
+      .left-panel { position: relative; height: auto; min-height: auto; padding: 48px 36px; }
       .lp-perks { display: none; }
       .lp-quote { display: none; }
-      .right-panel { padding: 48px 36px; }
-      .form-row { grid-template-columns: 1fr; }
+      .right-panel { padding: 48px 28px 60px; }
+      .form-row, .form-row-3 { grid-template-columns: 1fr; }
+      .checkbox-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -460,14 +344,12 @@
 <!-- ══ LEFT PANEL ══ -->
 <div class="left-panel">
   <div class="top-line"></div>
-
   <a href="index%20(3).html" class="lp-logo">Female <em>Founder</em> Collective.</a>
 
   <div class="lp-center">
     <div class="lp-label">Membership Application</div>
     <h1 class="lp-heading">Your seat at<br>the <em>table</em><br>awaits.</h1>
     <p class="lp-sub">Join a community of Saudi women building businesses with purpose, power, and each other.</p>
-
     <div class="lp-perks">
       <div class="lp-perk">
         <div class="lp-perk-icon">
@@ -516,25 +398,24 @@
     <p class="form-sub">Fill in your details below — we'll review your application and be in touch soon.</p>
   </div>
 
-  <!-- FORM -->
   <form class="register-form" id="memberForm">
 
-    <!-- ── SECTION 1: PERSONAL INFO ── -->
+    <!-- ══ SECTION 1: PERSONAL INFO ══ -->
     <div class="field-section-label">Personal Information</div>
 
     <div class="form-row">
       <div class="field">
-        <label>First Name</label>
+        <label>First Name *</label>
         <input type="text" id="first_name" placeholder="Noura" required/>
       </div>
       <div class="field">
-        <label>Last Name</label>
+        <label>Last Name *</label>
         <input type="text" id="last_name" placeholder="Al-Rashid" required/>
       </div>
     </div>
 
     <div class="field">
-      <label>Email Address</label>
+      <label>Email Address *</label>
       <input type="email" id="email" placeholder="you@example.com" required/>
     </div>
 
@@ -553,20 +434,22 @@
             <option>Dammam</option>
             <option>Mecca</option>
             <option>Medina</option>
+            <option>Khobar</option>
+            <option>Tabuk</option>
             <option>Other</option>
           </select>
         </div>
       </div>
     </div>
 
-    <!-- ── SECTION 2: HOW DID YOU HEAR ABOUT US ── -->
+    <!-- ══ SECTION 2: HOW DID YOU HEAR ABOUT US ══ -->
     <div class="field-divider"></div>
     <div class="field-section-label">How Did You Find Us?</div>
 
     <div class="field">
       <label>Where did you hear about FFC?</label>
       <div class="select-wrap">
-        <select id="heard_from" required>
+        <select id="heard_from">
           <option value="" disabled selected>Select an option</option>
           <option>Instagram</option>
           <option>LinkedIn</option>
@@ -574,68 +457,190 @@
           <option>Google search</option>
           <option>An event</option>
           <option>Twitter / X</option>
+          <option>Snapchat</option>
           <option>Other</option>
         </select>
       </div>
     </div>
 
-    <!-- ── SECTION 3: BUSINESS (OPTIONAL) ── -->
+    <!-- ══ SECTION 3: BUSINESS ══ -->
     <div class="field-divider"></div>
     <div class="field-section-label">Your Business</div>
 
-    <label class="business-toggle" for="has_business">
-      <input type="checkbox" id="has_business"/>
-      <div class="business-toggle-text">
-        <strong>I have a business or brand</strong>
-        <span>Check this if you'd like to share details about your venture</span>
-      </div>
-    </label>
-
-    <div class="business-fields" id="businessFields">
-      <div class="field">
-        <label>Business / Brand Name</label>
-        <input type="text" id="business_name" placeholder="Your brand name"/>
-      </div>
-
-      <div class="form-row">
-        <div class="field">
-          <label>Industry</label>
-          <div class="select-wrap">
-            <select id="industry">
-              <option value="" disabled selected>Select industry</option>
-              <option>Fashion & Beauty</option>
-              <option>Tech & Innovation</option>
-              <option>Food & Hospitality</option>
-              <option>Health & Wellness</option>
-              <option>Education</option>
-              <option>Finance</option>
-              <option>Creative Arts</option>
-              <option>Other</option>
-            </select>
-          </div>
+    <div class="business-toggle-wrap">
+      <!-- Toggle header -->
+      <label class="toggle-header" for="has_business">
+        <div class="toggle-switch">
+          <input type="checkbox" id="has_business"/>
+          <div class="toggle-track"></div>
+          <div class="toggle-thumb"></div>
         </div>
-        <div class="field">
-          <label>Business Stage</label>
-          <div class="select-wrap">
-            <select id="business_stage">
-              <option value="" disabled selected>Select stage</option>
-              <option>Idea Stage</option>
-              <option>Early Stage</option>
-              <option>Growing</option>
-              <option>Established</option>
-            </select>
-          </div>
+        <div class="toggle-label-text">
+          <strong>I have a business or brand</strong>
+          <span>Toggle on to tell us about your venture</span>
         </div>
-      </div>
+      </label>
 
-      <div class="field">
-        <label>Tell us about your business & goals</label>
-        <textarea id="about_and_goals" placeholder="Share what you're building and what you hope to achieve through FFC..."></textarea>
+      <!-- Expanding business fields -->
+      <div class="business-expand" id="businessExpand">
+        <div class="business-expand-inner">
+
+          <div class="sub-section">Basic Details</div>
+
+          <div class="field">
+            <label>Business / Brand Name</label>
+            <input type="text" id="business_name" placeholder="e.g. Lumi Studio"/>
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label>Website</label>
+              <input type="url" id="business_website" placeholder="www.yourbrand.com"/>
+            </div>
+            <div class="field">
+              <label>Instagram Handle</label>
+              <input type="text" id="business_instagram" placeholder="@yourbrand"/>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label>Industry / Sector</label>
+              <div class="select-wrap">
+                <select id="industry">
+                  <option value="" disabled selected>Select industry</option>
+                  <option>Fashion & Beauty</option>
+                  <option>Tech & Innovation</option>
+                  <option>Food & Hospitality</option>
+                  <option>Health & Wellness</option>
+                  <option>Education & Training</option>
+                  <option>Finance & Fintech</option>
+                  <option>Creative Arts & Media</option>
+                  <option>Real Estate</option>
+                  <option>E-commerce & Retail</option>
+                  <option>Consulting & Services</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label>Business Stage</label>
+              <div class="select-wrap">
+                <select id="business_stage">
+                  <option value="" disabled selected>Select stage</option>
+                  <option>Idea — not started yet</option>
+                  <option>Early Stage — just launched</option>
+                  <option>Growing — 1–3 years in</option>
+                  <option>Established — 3+ years</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label>Year Founded</label>
+              <input type="number" id="year_founded" placeholder="e.g. 2023" min="1990" max="2025"/>
+            </div>
+            <div class="field">
+              <label>Team Size</label>
+              <div class="select-wrap">
+                <select id="team_size">
+                  <option value="" disabled selected>Select size</option>
+                  <option>Solo founder</option>
+                  <option>2–5 people</option>
+                  <option>6–15 people</option>
+                  <option>16–50 people</option>
+                  <option>50+ people</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label>Is your business registered?</label>
+              <div class="select-wrap">
+                <select id="is_registered">
+                  <option value="" disabled selected>Select</option>
+                  <option value="yes">Yes, officially registered</option>
+                  <option value="no">Not yet</option>
+                  <option value="in_progress">In progress</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label>Annual Revenue Range</label>
+              <div class="select-wrap">
+                <select id="revenue_range">
+                  <option value="" disabled selected>Select range</option>
+                  <option>Pre-revenue</option>
+                  <option>Under SAR 100K</option>
+                  <option>SAR 100K – 500K</option>
+                  <option>SAR 500K – 1M</option>
+                  <option>SAR 1M – 5M</option>
+                  <option>SAR 5M+</option>
+                  <option>Prefer not to say</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="sub-section">Funding & Growth</div>
+
+          <div class="field">
+            <label>Are you currently seeking funding?</label>
+            <div class="select-wrap">
+              <select id="seeking_funding">
+                <option value="" disabled selected>Select</option>
+                <option value="yes">Yes, actively seeking</option>
+                <option value="maybe">Maybe in the future</option>
+                <option value="no">Not at this time</option>
+                <option value="bootstrapped">Bootstrapped by choice</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="sub-section">What Support Are You Looking For?</div>
+          <div class="checkbox-grid">
+            <label class="check-pill"><input type="checkbox" name="support" value="Mentorship"/> Mentorship</label>
+            <label class="check-pill"><input type="checkbox" name="support" value="Networking"/> Networking</label>
+            <label class="check-pill"><input type="checkbox" name="support" value="Funding Access"/> Funding Access</label>
+            <label class="check-pill"><input type="checkbox" name="support" value="Marketing & PR"/> Marketing & PR</label>
+            <label class="check-pill"><input type="checkbox" name="support" value="Legal & Finance Advice"/> Legal & Finance Advice</label>
+            <label class="check-pill"><input type="checkbox" name="support" value="Product Development"/> Product Development</label>
+            <label class="check-pill"><input type="checkbox" name="support" value="Workshops & Training"/> Workshops & Training</label>
+            <label class="check-pill"><input type="checkbox" name="support" value="Visibility & Media"/> Visibility & Media</label>
+          </div>
+
+          <div class="sub-section">About Your Business</div>
+
+          <div class="field">
+            <label>Describe your business in 2–3 sentences</label>
+            <textarea id="business_description" placeholder="What do you do, who do you serve, and what problem do you solve?"></textarea>
+          </div>
+
+          <div class="field">
+            <label>What makes your business unique?</label>
+            <textarea id="unique_value" placeholder="Your competitive advantage or what sets you apart..."></textarea>
+          </div>
+
+          <div class="field">
+            <label>Biggest challenge right now</label>
+            <textarea id="business_challenge" placeholder="What's the hardest thing you're facing in your business today?" style="min-height:70px;"></textarea>
+          </div>
+
+          <div class="field">
+            <label>What do you hope to gain from FFC?</label>
+            <textarea id="about_and_goals" placeholder="Tell us your goals and what success looks like for you through this community..." style="min-height:70px;"></textarea>
+          </div>
+
+        </div>
       </div>
     </div>
 
-    <!-- ── SUBMIT ── -->
-    <div class="field-divider"></div>
+    <!-- ══ TERMS & SUBMIT ══ -->
+    <div class="field-divider" style="margin-top:28px;"></div>
 
     <div class="checkbox-field">
       <input type="checkbox" id="agreed_to_terms" required/>
@@ -648,7 +653,6 @@
     </div>
 
     <button type="submit" class="submit-btn">Submit Application</button>
-
     <p class="login-link">Already a member? <a href="#">Sign in here</a></p>
 
   </form>
@@ -667,26 +671,24 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-  // Toggle business fields
-  document.getElementById('has_business').addEventListener('change', function() {
-    document.getElementById('businessFields').classList.toggle('visible', this.checked);
+  // ── Toggle business expand ──
+  const toggle = document.getElementById('has_business');
+  const expand = document.getElementById('businessExpand');
+  toggle.addEventListener('change', () => {
+    expand.classList.toggle('open', toggle.checked);
   });
 
+  // ── Supabase ──
   const SUPABASE_URL = "https://wtjsvrwhphuvwwlgozj.supabase.co";
   const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_jDqQhY4nJ7VlRltX1LzQbg_SHssn2ya";
   const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
 
-  function val(id) {
-    const el = document.getElementById(id);
-    return el ? el.value.trim() : "";
-  }
-  function opt(id) {
-    const v = val(id);
-    return v === "" ? null : v;
-  }
-  function checked(id) {
-    const el = document.getElementById(id);
-    return !!(el && el.checked);
+  function val(id)  { const el = document.getElementById(id); return el ? el.value.trim() : ""; }
+  function opt(id)  { const v = val(id); return v === "" ? null : v; }
+  function bool(id) { const el = document.getElementById(id); return !!(el && el.checked); }
+  function multiCheck(name) {
+    return [...document.querySelectorAll(`input[name="${name}"]:checked`)]
+      .map(el => el.value).join(', ') || null;
   }
 
   document.addEventListener("DOMContentLoaded", () => {
@@ -695,20 +697,35 @@
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const hasBusiness = checked("has_business");
+      const hasBusiness = bool("has_business");
+
       const payload = {
-        first_name:      val("first_name"),
-        last_name:       val("last_name"),
-        email:           val("email"),
-        phone:           opt("phone"),
-        city:            opt("city"),
-        heard_from:      opt("heard_from"),
-        business_name:   hasBusiness ? opt("business_name")   : null,
-        industry:        hasBusiness ? opt("industry")        : null,
-        business_stage:  hasBusiness ? opt("business_stage")  : null,
-        about_and_goals: hasBusiness ? opt("about_and_goals") : null,
-        agreed_to_terms: checked("agreed_to_terms"),
-        wants_updates:   checked("wants_updates")
+        // Personal
+        first_name:           val("first_name"),
+        last_name:            val("last_name"),
+        email:                val("email"),
+        phone:                opt("phone"),
+        city:                 opt("city"),
+        heard_from:           opt("heard_from"),
+        // Business (only if toggled on)
+        business_name:        hasBusiness ? opt("business_name")        : null,
+        business_website:     hasBusiness ? opt("business_website")     : null,
+        business_instagram:   hasBusiness ? opt("business_instagram")   : null,
+        industry:             hasBusiness ? opt("industry")             : null,
+        business_stage:       hasBusiness ? opt("business_stage")       : null,
+        year_founded:         hasBusiness ? (opt("year_founded") ? parseInt(opt("year_founded")) : null) : null,
+        team_size:            hasBusiness ? opt("team_size")            : null,
+        is_registered:        hasBusiness ? opt("is_registered")        : null,
+        revenue_range:        hasBusiness ? opt("revenue_range")        : null,
+        seeking_funding:      hasBusiness ? opt("seeking_funding")      : null,
+        support_needed:       hasBusiness ? multiCheck("support")       : null,
+        business_description: hasBusiness ? opt("business_description") : null,
+        unique_value:         hasBusiness ? opt("unique_value")         : null,
+        business_challenge:   hasBusiness ? opt("business_challenge")   : null,
+        about_and_goals:      hasBusiness ? opt("about_and_goals")      : null,
+        // Meta
+        agreed_to_terms:      bool("agreed_to_terms"),
+        wants_updates:        bool("wants_updates"),
       };
 
       if (!payload.first_name || !payload.last_name || !payload.email) {
@@ -724,7 +741,7 @@
       if (error) {
         console.error("Insert error:", error);
         if (error.code === '23505') {
-          alert("This email is already registered. Please use a different email.");
+          alert("This email is already registered.");
         } else {
           alert("Something went wrong: " + error.message);
         }
