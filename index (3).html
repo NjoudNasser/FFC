@@ -174,7 +174,7 @@
   .prog-icon-initials { font-family: 'Cormorant Garamond', serif; font-size: 1.55rem; font-weight: 500; letter-spacing: .06em; }
   .prog-icon-num { font-family: 'DM Sans', sans-serif; font-size: .38rem; letter-spacing: .28em; opacity: .6; margin-top: 6px; }
   .prog-card-meta { flex: 1; padding-top: 3px; }
-  .prog-meta-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; flex-wrap: wrap; }
+  .prog-meta-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; flex-wrap: nowrap; }
   .prog-badge { display: inline-flex; align-items: center; gap: 7px; font-family: 'DM Sans', sans-serif; font-size: .44rem; letter-spacing: .36em; text-transform: uppercase; color: #fff; background: var(--burgundy); padding: 5px 12px; }
   .prog-badge-dot { display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,.7); animation: prog-pulse 1.7s ease-in-out infinite; flex-shrink: 0; }
   @keyframes prog-pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.3;transform:scale(.65)} }
@@ -187,9 +187,9 @@
   .prog-circles { display: flex; }
   .prog-circle { width: 30px; height: 30px; border-radius: 50%; background: var(--burgundy); border: 2.5px solid #fff; display: flex; align-items: center; justify-content: center; font-family: 'DM Sans', sans-serif; font-size: .5rem; font-weight: 700; color: #fff; margin-left: -7px; box-shadow: 0 1px 5px rgba(0,0,0,.12); }
   .prog-circle:first-child { margin-left: 0; }
-  .prog-format { font-family: 'DM Sans', sans-serif; font-size: .78rem; font-weight: 600; color: var(--ink); margin-left: 4px; }
+  .prog-format { font-family: 'DM Sans', sans-serif; font-size: .78rem; font-weight: 600; color: var(--ink); margin-left: 4px; white-space: nowrap; }
   .prog-format-sep { color: rgba(139,21,56,.2); font-size: .75rem; }
-  .prog-format-detail { font-size: .78rem; font-weight: 300; color: var(--muted); }
+  .prog-format-detail { font-size: .78rem; font-weight: 300; color: var(--muted); white-space: nowrap; }
 
   .programs-footer { border-top: 1px solid var(--sand); margin-top: 56px; padding: 44px 80px; display: flex; justify-content: center; position: relative; z-index: 1; }
 
@@ -445,7 +445,7 @@
         </div>
         <span class="prog-format">Curated Sessions</span>
         <span class="prog-format-sep">·</span>
-        <span class="prog-format-detail">Riyadh, Saudi Arabia</span>
+        <span class="prog-format-detail">Riyadh</span>
       </div>
     </div>
 
