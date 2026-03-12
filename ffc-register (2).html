@@ -63,7 +63,6 @@
       pointer-events: none;
     }
 
-    /* top line accent */
     .left-panel .top-line {
       position: absolute;
       top: 0; left: 0; right: 0;
@@ -180,7 +179,7 @@
     }
 
     .form-header {
-      margin-bottom: 40px;
+      margin-bottom: 36px;
     }
     .form-header .back-link {
       display: inline-flex;
@@ -284,7 +283,7 @@
     .field-divider {
       height: 1px;
       background: var(--sand);
-      margin: 8px 0 24px;
+      margin: 4px 0 24px;
     }
 
     .field-section-label {
@@ -293,7 +292,7 @@
       letter-spacing: .18em;
       text-transform: uppercase;
       color: var(--rose);
-      margin-bottom: 16px;
+      margin-bottom: 18px;
       display: flex;
       align-items: center;
       gap: 10px;
@@ -304,6 +303,42 @@
       height: 1px;
       background: var(--sand);
     }
+
+    /* business toggle */
+    .business-toggle {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 18px;
+      background: white;
+      border: 1px solid var(--sand);
+      cursor: pointer;
+      margin-bottom: 20px;
+      transition: border-color .2s;
+    }
+    .business-toggle:hover { border-color: var(--rose); }
+    .business-toggle input[type="checkbox"] {
+      width: 18px; height: 18px;
+      accent-color: var(--burgundy);
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+    .business-toggle-text strong {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .business-toggle-text span {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .business-fields {
+      display: none;
+      flex-direction: column;
+    }
+    .business-fields.visible { display: flex; }
 
     /* checkboxes */
     .checkbox-field {
@@ -385,44 +420,6 @@
       border-bottom: 1px solid rgba(199,54,95,.3);
     }
 
-    /* step indicator */
-    .steps {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 32px;
-    }
-    .step {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 11px;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-    .step.active { color: var(--burgundy); font-weight: 600; }
-    .step.done { color: var(--rose); }
-    .step-num {
-      width: 24px; height: 24px;
-      border-radius: 50%;
-      border: 1.5px solid var(--sand);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 11px; font-weight: 600;
-      color: var(--muted);
-      background: white;
-    }
-    .step.active .step-num {
-      background: var(--burgundy);
-      border-color: var(--burgundy);
-      color: white;
-    }
-    .step-sep {
-      flex: 1; height: 1px;
-      background: var(--sand);
-      max-width: 32px;
-    }
-
     /* success state */
     .success-state {
       display: none;
@@ -464,7 +461,7 @@
 <div class="left-panel">
   <div class="top-line"></div>
 
-  <a href="community-website-step1.html" class="lp-logo">Female <em>Founder</em> Collective.</a>
+  <a href="index%20(3).html" class="lp-logo">Female <em>Founder</em> Collective.</a>
 
   <div class="lp-center">
     <div class="lp-label">Membership Application</div>
@@ -511,28 +508,10 @@
 <div class="right-panel">
 
   <div class="form-header">
-    <a href="community-website-step1.html" class="back-link">
+    <a href="index%20(3).html" class="back-link">
       <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
       Back to site
     </a>
-
-    <div class="steps">
-      <div class="step active">
-        <div class="step-num">1</div>
-        About You
-      </div>
-      <div class="step-sep"></div>
-      <div class="step">
-        <div class="step-num">2</div>
-        Your Business
-      </div>
-      <div class="step-sep"></div>
-      <div class="step">
-        <div class="step-num">3</div>
-        Confirm
-      </div>
-    </div>
-
     <h2 class="form-title">Join the <em>Collective</em></h2>
     <p class="form-sub">Fill in your details below — we'll review your application and be in touch soon.</p>
   </div>
@@ -540,7 +519,8 @@
   <!-- FORM -->
   <form class="register-form" id="memberForm">
 
-    <div class="field-section-label">Personal Info</div>
+    <!-- ── SECTION 1: PERSONAL INFO ── -->
+    <div class="field-section-label">Personal Information</div>
 
     <div class="form-row">
       <div class="field">
@@ -558,70 +538,103 @@
       <input type="email" id="email" placeholder="you@example.com" required/>
     </div>
 
-    <div class="field">
-      <label>Phone Number</label>
-      <input type="tel" id="phone" placeholder="+966 5X XXX XXXX"/>
+    <div class="form-row">
+      <div class="field">
+        <label>Phone Number</label>
+        <input type="tel" id="phone" placeholder="+966 5X XXX XXXX"/>
+      </div>
+      <div class="field">
+        <label>City</label>
+        <div class="select-wrap">
+          <select id="city">
+            <option value="" disabled selected>Select your city</option>
+            <option>Riyadh</option>
+            <option>Jeddah</option>
+            <option>Dammam</option>
+            <option>Mecca</option>
+            <option>Medina</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
     </div>
 
+    <!-- ── SECTION 2: HOW DID YOU HEAR ABOUT US ── -->
+    <div class="field-divider"></div>
+    <div class="field-section-label">How Did You Find Us?</div>
+
     <div class="field">
-      <label>City</label>
+      <label>Where did you hear about FFC?</label>
       <div class="select-wrap">
-        <select id="city">
-          <option value="" disabled selected>Select your city</option>
-          <option>Riyadh</option>
-          <option>Jeddah</option>
-          <option>Dammam</option>
-          <option>Mecca</option>
-          <option>Medina</option>
+        <select id="heard_from" required>
+          <option value="" disabled selected>Select an option</option>
+          <option>Instagram</option>
+          <option>LinkedIn</option>
+          <option>A friend or colleague</option>
+          <option>Google search</option>
+          <option>An event</option>
+          <option>Twitter / X</option>
           <option>Other</option>
         </select>
       </div>
     </div>
 
+    <!-- ── SECTION 3: BUSINESS (OPTIONAL) ── -->
     <div class="field-divider"></div>
     <div class="field-section-label">Your Business</div>
 
-    <div class="field">
-      <label>Business / Brand Name</label>
-      <input type="text" id="business_name" placeholder="Your brand name"/>
-    </div>
+    <label class="business-toggle" for="has_business">
+      <input type="checkbox" id="has_business"/>
+      <div class="business-toggle-text">
+        <strong>I have a business or brand</strong>
+        <span>Check this if you'd like to share details about your venture</span>
+      </div>
+    </label>
 
-    <div class="form-row">
+    <div class="business-fields" id="businessFields">
       <div class="field">
-        <label>Industry</label>
-        <div class="select-wrap">
-          <select id="industry">
-            <option value="" disabled selected>Select industry</option>
-            <option>Fashion & Beauty</option>
-            <option>Tech & Innovation</option>
-            <option>Food & Hospitality</option>
-            <option>Health & Wellness</option>
-            <option>Education</option>
-            <option>Finance</option>
-            <option>Creative Arts</option>
-            <option>Other</option>
-          </select>
+        <label>Business / Brand Name</label>
+        <input type="text" id="business_name" placeholder="Your brand name"/>
+      </div>
+
+      <div class="form-row">
+        <div class="field">
+          <label>Industry</label>
+          <div class="select-wrap">
+            <select id="industry">
+              <option value="" disabled selected>Select industry</option>
+              <option>Fashion & Beauty</option>
+              <option>Tech & Innovation</option>
+              <option>Food & Hospitality</option>
+              <option>Health & Wellness</option>
+              <option>Education</option>
+              <option>Finance</option>
+              <option>Creative Arts</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label>Business Stage</label>
+          <div class="select-wrap">
+            <select id="business_stage">
+              <option value="" disabled selected>Select stage</option>
+              <option>Idea Stage</option>
+              <option>Early Stage</option>
+              <option>Growing</option>
+              <option>Established</option>
+            </select>
+          </div>
         </div>
       </div>
+
       <div class="field">
-        <label>Business Stage</label>
-        <div class="select-wrap">
-          <select id="business_stage">
-            <option value="" disabled selected>Select stage</option>
-            <option>Idea Stage</option>
-            <option>Early Stage</option>
-            <option>Growing</option>
-            <option>Established</option>
-          </select>
-        </div>
+        <label>Tell us about your business & goals</label>
+        <textarea id="about_and_goals" placeholder="Share what you're building and what you hope to achieve through FFC..."></textarea>
       </div>
     </div>
 
-    <div class="field">
-      <label>Tell us about yourself & your goals</label>
-      <textarea id="about_and_goals" placeholder="Share a little about who you are, what you're building, and what you hope to get from FFC..."></textarea>
-    </div>
-
+    <!-- ── SUBMIT ── -->
     <div class="field-divider"></div>
 
     <div class="checkbox-field">
@@ -647,18 +660,22 @@
     </div>
     <h3>Application Received!</h3>
     <p>Thank you for joining the movement. We'll review your application and reach out within 3–5 business days.</p>
-    <a href="community-website-step1.html" style="font-size:13px;color:var(--rose);text-decoration:none;border-bottom:1px solid rgba(199,54,95,.3);padding-bottom:2px;letter-spacing:.06em;">← Back to FFC</a>
+    <a href="index%20(3).html" style="font-size:13px;color:var(--rose);text-decoration:none;border-bottom:1px solid rgba(199,54,95,.3);padding-bottom:2px;letter-spacing:.06em;">← Back to FFC</a>
   </div>
 
 </div>
 
-<!-- 1) Supabase SDK + client -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+  // Toggle business fields
+  document.getElementById('has_business').addEventListener('change', function() {
+    document.getElementById('businessFields').classList.toggle('visible', this.checked);
+  });
+
   const SUPABASE_URL = "https://wtjsvrwhphuvwwlgozj.supabase.co";
   const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_jDqQhY4nJ7VlRltX1LzQbg_SHssn2ya";
   const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
-  // Helper: safely read input value by id
+
   function val(id) {
     const el = document.getElementById(id);
     return el ? el.value.trim() : "";
@@ -671,44 +688,43 @@
     const el = document.getElementById(id);
     return !!(el && el.checked);
   }
-  // 2) Hook your form submit
-  // IMPORTANT: your form element must have id="memberForm"
+
   document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("memberForm");
-    if (!form) {
-      console.warn('memberForm not found. Add id="memberForm" to your membership <form>.');
-      return;
-    }
+    if (!form) return;
+
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
+      const hasBusiness = checked("has_business");
       const payload = {
-        first_name: val("first_name"),
-        last_name: val("last_name"),
-        email: val("email"),
-        phone: opt("phone"),
-        city: opt("city"),
-        business_name: opt("business_name"),
-        industry: opt("industry"),
-        business_stage: opt("business_stage"),
-        about_and_goals: opt("about_and_goals"),
+        first_name:      val("first_name"),
+        last_name:       val("last_name"),
+        email:           val("email"),
+        phone:           opt("phone"),
+        city:            opt("city"),
+        heard_from:      opt("heard_from"),
+        business_name:   hasBusiness ? opt("business_name")   : null,
+        industry:        hasBusiness ? opt("industry")        : null,
+        business_stage:  hasBusiness ? opt("business_stage")  : null,
+        about_and_goals: hasBusiness ? opt("about_and_goals") : null,
         agreed_to_terms: checked("agreed_to_terms"),
-        wants_updates: checked("wants_updates")
+        wants_updates:   checked("wants_updates")
       };
-      // Basic required checks (matches NOT NULL in DB)
+
       if (!payload.first_name || !payload.last_name || !payload.email) {
-        alert("Please fill first name, last name, and email.");
+        alert("Please fill in your first name, last name, and email.");
         return;
       }
       if (!payload.agreed_to_terms) {
-        alert("Please agree to the terms.");
+        alert("Please agree to the Terms & Conditions.");
         return;
       }
+
       const { error } = await supabase.from("members").insert([payload]);
       if (error) {
-        console.error("Insert members error:", error);
-        // Common: duplicate email (unique constraint)
+        console.error("Insert error:", error);
         if (error.code === '23505') {
-          alert("This email address is already registered. Please use a different email.");
+          alert("This email is already registered. Please use a different email.");
         } else {
           alert("Something went wrong: " + error.message);
         }
